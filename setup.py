@@ -24,17 +24,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "psutil",
-        "tqdm>=4.56.0",
-        "numpy>=1.19.5",
-        "scikit-learn>=0.24.1",
-        "scipy>=1.6.0",
-        "plotly>=4.14.3",
-        "pandas>=1.2.1",
-        "dash>=1.19.0",
-        "matplotlib>=3.3.3",
+        "psutil>=5.8.0",
     ],
 )
 
 
 #  cmd: setup.py sdist bdist_wheel
+
