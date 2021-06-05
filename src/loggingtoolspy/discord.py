@@ -1,5 +1,19 @@
-import requests
-from discord import Webhook, RequestsWebhookAdapter
+from discord_webhook import DiscordWebhook
+import logging
 
-webhook = Webhook.from_url("url-here", adapter=RequestsWebhookAdapter())
-webhook.send("Hello World")
+
+def send_logs_file_to_discord(webhook_url: str):
+    webhook = DiscordWebhook(url=webhook_url)
+    filenames = [
+        getattr(h, "baseFilename")
+        for h in logging.root.handlers
+        if hasattr(h, "baseFilename")
+    ]
+
+    for filename in filenames:
+        with open(filename, "r") as f:
+            webhook.add_file(file=f.read(), filename=filename)
+
+    return webhook.execute()
+
+
