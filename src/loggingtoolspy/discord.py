@@ -2,8 +2,8 @@ from discord_webhook import DiscordWebhook
 import logging
 
 
-def send_logs_file_to_discord(webhook_url: str):
-    webhook = DiscordWebhook(url=webhook_url)
+def send_logs_file_to_discord(webhook_urls: str):
+    webhook = DiscordWebhook(url=webhook_urls)
     filenames = [
         getattr(h, "baseFilename")
         for h in logging.root.handlers
