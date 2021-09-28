@@ -29,5 +29,11 @@ setup(
 )
 
 
-#  cmd: setup.py sdist bdist_wheel
+# build library
+#  setup.py sdist bdist_wheel
+
+# publish on PyPI
+#   twine check dist/*
+#   twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+#   twine upload dist/*
 
