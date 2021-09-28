@@ -1,8 +1,12 @@
-from discord_webhook import DiscordWebhook
 import logging
 
 
 def send_logs_file_to_discord(webhook_urls: str):
+    try:
+        from discord_webhook import DiscordWebhook
+    except ImportError:
+        logging.error("The package discord_webhook must be installed.")
+        return -1
     webhook = DiscordWebhook(url=webhook_urls)
     filenames = [
         getattr(h, "baseFilename")
