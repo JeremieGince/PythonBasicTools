@@ -25,6 +25,7 @@ setup(
     ],
     install_requires=[
         "psutil>=5.8.0",
+        "tqdm>=4.56.0",
     ],
 )
 
