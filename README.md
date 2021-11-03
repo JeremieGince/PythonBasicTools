@@ -13,6 +13,6 @@ It contains tools for:
 
 # Installation
 
-0. Download the .whl file [here](https://github.com/JeremieGince/PythonBasicTools/dist/PythonBasicTools-0.0.0.1-py3-none-any.whl);
+0. Download the .whl file [here](https://github.com/JeremieGince/PythonBasicTools/tree/main/dist/PythonBasicTools-0.0.0.1-py3-none-any.whl);
 1. Copy the path of this file on your computer;
 2. pip install it with ``` pip install [path].whl ```
