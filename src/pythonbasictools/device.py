@@ -9,7 +9,7 @@ class DeepLib(enum.Enum):
     SkLearn = 2
 
 
-def log_device_setup(deepLib: DeepLib = DeepLib.Null):
+def log_device_setup(deepLib: DeepLib = DeepLib.Null, level=logging.INFO):
     import sys
     import psutil
     import multiprocessing
@@ -24,10 +24,10 @@ def log_device_setup(deepLib: DeepLib = DeepLib.Null):
         DeepLib.Tensorflow: log_tensorflow_device_setup,
         DeepLib.SkLearn: log_sklearn_device_setup,
     }
-    setup_func[deepLib]()
+    setup_func[deepLib](level)
 
 
-def log_pytorch_device_setup():
+def log_pytorch_device_setup(level=logging.INFO):
     from subprocess import check_output
     import torch
 
@@ -56,7 +56,7 @@ def log_pytorch_device_setup():
         logging.info(f"Memory summary: \n{torch.cuda.memory_summary()}")
 
 
-def log_tensorflow_device_setup():
+def log_tensorflow_device_setup(level=logging.INFO):
     import tensorflow as tf
     from subprocess import check_output
     logging.info(f'__tensorflow VERSION:{tf.__version__}')
@@ -72,9 +72,23 @@ def log_tensorflow_device_setup():
     logging.info(f"physical_devices: {physical_devices}")
     logical_devices = tf.config.list_logical_devices('GPU')
     logging.info(f"logical_devices: {logical_devices}")
+    set_tf_loglevel(level)
 
 
-def log_sklearn_device_setup():
+def set_tf_loglevel(level=logging.INFO):
+    import os
+    if level >= logging.FATAL:
+        os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+    if level >= logging.ERROR:
+        os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+    if level >= logging.WARNING:
+        os.environ['TF_CPP_MIN_LOG_LEVEL'] = '1'
+    else:
+        os.environ['TF_CPP_MIN_LOG_LEVEL'] = '0'
+    logging.getLogger('tensorflow').setLevel(level)
+
+
+def log_sklearn_device_setup(level=logging.INFO):
     import sklearn
     logging.info(f'__sklearn VERSION:{sklearn.__version__}')
 
