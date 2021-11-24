@@ -41,7 +41,11 @@ def apply_func_multiprocess(func, iterable_of_args: List[Tuple], nb_workers=-2, 
 
 	q_listener, q = multiprocess_logger_init()
 
-	with tqdm.tqdm(total=len(iterable_of_args), desc=kwargs.get("desc", ""), unit=kwargs.get("unit", "")) as pbar:
+	with tqdm.tqdm(
+			total=len(iterable_of_args),
+			desc=kwargs.get("desc", None),
+			unit=kwargs.get("unit", "it")
+	) as pbar:
 		with Pool(nb_workers, worker_init, [q]) as pool:
 			def callback(*args):
 				pbar.update()
