@@ -19,7 +19,7 @@ def log_device_setup(deepLib: DeepLib = DeepLib.Null, level=logging.INFO):
     logging.info(f"Number of available logical processors: {multiprocessing.cpu_count()}.")
 
     setup_func = {
-        DeepLib.Null: lambda: None,
+        DeepLib.Null: lambda *args: None,
         DeepLib.Pytorch: log_pytorch_device_setup,
         DeepLib.Tensorflow: log_tensorflow_device_setup,
         DeepLib.SkLearn: log_sklearn_device_setup,
