@@ -49,10 +49,7 @@ def printProgressBar(
                        f'{percent}% {suffix}'
     # Print New Line on Complete
     if iteration == total:
-        # log_func('\r' + progress_bar, end=printEnd)
-        # log_func('\r\t*')
-        # log_func()
-        logging.info('\r'+progress_bar.replace(fill, '#'))
+        log_func('\r'+progress_bar.replace(fill, '#'))
     else:
         log_func('\r' + progress_bar, end=printEnd)
 
