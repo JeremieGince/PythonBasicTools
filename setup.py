@@ -5,6 +5,9 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
+with open("requirements.txt", "r", encoding="utf-8") as fh:
+    install_requires = fh.readlines()
+
 setup(
     name='PythonBasicTools',
     version=__version__,
@@ -23,10 +26,7 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ],
-    install_requires=[
-        "psutil>=5.8.0",
-        "tqdm>=4.56.0",
-    ],
+    install_requires=install_requires,
 )
 
 
