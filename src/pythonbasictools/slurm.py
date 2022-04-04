@@ -50,6 +50,11 @@ def generate_slurm_cmd(
 	Generate a command to run on a host.
 	:param repository_root: The root directory of the repository.
 	:param credential: The credential to use.
+		Must be in the format:
+		{
+			"username": "<username>",
+			"password": "<password>"
+		}
 	:param bash_file_to_run: The bash file to run.
 	:param run_count: The number of times to run the bash file.
 	:param job_to_cancel: The job to cancel.
