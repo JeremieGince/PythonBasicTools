@@ -2,8 +2,6 @@ import enum
 import logging
 from typing import Dict, List
 
-import paramiko
-
 
 class SlurmHostServer(enum.Enum):
 	BELUGA = "beluga.computecanada.ca"
@@ -13,6 +11,7 @@ class SlurmHostServer(enum.Enum):
 
 
 def send_slurm_cmd(hostnames, port, username, password, cmd_to_execute):
+	import paramiko
 	"""
 	Send a command to a host.
 	:param hostnames: The hostname of the host to send the command to.
