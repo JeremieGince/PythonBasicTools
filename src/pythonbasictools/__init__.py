@@ -1,6 +1,7 @@
 __author__ = "Jérémie Gince"
 # repository: https://github.com/JeremieGince/PythonBasicTools
 
+from .version import __version__
 from .logging import logs_file_setup
 from .device import DeepLib, log_device_setup
 from .decorators import log_func
