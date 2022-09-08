@@ -7,6 +7,23 @@ import docutils.nodes
 
 
 def get_bases_docs(prop, bases: Optional[Union[Type, List[Type]]] = None) -> Dict[str, str]:
+	"""
+	Get the docstring of the parent class.
+	
+	:param prop: The object to find the parent class of.
+	:type prop: Any
+	:param bases: The list of base classes to inherit the docstring from.
+	:type bases: Optional[Union[Type, List[Type]]]
+	
+	:return: A dictionary of the docstring of the parent class. The key is the name of the parent class and
+		the value is the docstring of the parent class.
+	:rtype: Dict[str, str]
+	"""
+	if bases is None:
+		raise NotImplementedError(
+			"bases cannot be None. In the future, it will be automatically set to the parent class."
+		)
+	
 	if not isinstance(bases, (list, tuple)):
 		bases = [bases]
 	if inspect.isclass(prop):
@@ -40,11 +57,13 @@ def inherit_docstring(
 
 	:return: The decorated object.
 	"""
+	if bases is None:
+		raise NotImplementedError(
+			"bases cannot be None. In the future, it will be automatically set to the parent class."
+		)
+	
 	def decorator_func(__prop):
 		bases_docs = get_bases_docs(__prop, bases)
-		# print(f"{inspect.isfunction(__prop) = }, {inspect.ismethod(__prop) = }, {inspect.isclass(__prop) = }")
-		# print(f"{__prop}")
-		# print(f"{__prop.__name__}({cls}).bases = {__bases}")
 		if __prop.__doc__ is None:
 			__prop.__doc__ = ""
 		__prop.__doc__ = sep.join(filter(None, [d for d in bases_docs.values()])) + __prop.__doc__
@@ -63,6 +82,11 @@ def inherit_fields_docstring(
 		bases: Optional[Union[Type, List[Type]]] = None,
 		fields: Optional[List[str]] = None,
 ):
+	if bases is None:
+		raise NotImplementedError(
+			"bases cannot be None. In the future, it will be automatically set to the parent class."
+		)
+	
 	def decorator_func(__prop):
 		new_line_char, new_line_tab_char = '\n', '\n\t\t'
 		if __prop.__doc__ is None:
@@ -129,6 +153,17 @@ def walk_docstring(doc: str) -> Dict[str, List[str]]:
 
 
 def get_field_from_docstring(doc: str, field_name: str) -> List[str]:
+	"""
+	Get all field body associated to a field name in a docstring.
+	
+	:param doc: The docstring to parse.
+	:type doc: str
+	:param field_name: The field name to look for.
+	:type field_name: str
+	
+	:return: The list of field body associated to the field name.
+	:rtype: List[str]
+	"""
 	if field_name == "Attributes":
 		return walk_docstring(doc)[field_name]
 	else:
