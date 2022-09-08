@@ -36,7 +36,7 @@ class TestDocstring(unittest.TestCase):
 			[doc[i] == s for i, s in enumerate([
 				"- :attr:`attr1` (int): this is attr1\n"
 				"- :attr:`attr2` (int): this is attr2\n"
-				"- :attr:`attr3` (int): this is attr3\n"
+				"- :attr:`attr3` (int): this is attr3"
 			])]))
 
 	def test_inherit_docstring_empty(self):
