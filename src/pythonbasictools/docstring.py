@@ -78,12 +78,31 @@ def inherit_fields_docstring(
 		*,
 		sep: str = '\n',
 		bases: Optional[Union[Type, List[Type]]] = None,
-		fields: Optional[List[str]] = None,
+		fields: Optional[Union[List[str], str]] = None,
 ):
+	"""
+	Inherit the fields of the parents docstrings and add it to the child fields.
+	
+	:param _prop: The object to decorate.
+	:type _prop: Any
+	:param sep: The separator to use between the docstring of the parent and the child.
+	:type sep: str
+	:param bases: The list of base classes to inherit the docstring from.
+	:type bases: Optional[Union[Type, List[Type]]]
+	:param fields: The list of fields to inherit. If the fields is a string, it will be converted to a list by splitting
+		the string by the ',' character. If the fields is None, it will be set to all found fields.
+	
+	:type fields: Optional[Union[List[str], str]]
+	
+	:return: The decorated object.
+	:rtype: Any
+	"""
 	if bases is None:
 		raise NotImplementedError(
 			"bases cannot be None. In the future, it will be automatically set to the parent class."
 		)
+	if isinstance(fields, str):
+		fields = fields.replace(' ', '').split(",")
 	
 	def decorator_func(__prop):
 		new_line_char, new_line_tab_char = '\n', '\n\t\t'
