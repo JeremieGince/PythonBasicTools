@@ -64,7 +64,7 @@ def inherit_docstring(
 		bases_docs = get_bases_docs(__prop, bases)
 		if __prop.__doc__ is None:
 			__prop.__doc__ = ""
-		__prop.__doc__ = sep.join(filter(None, [d for d in bases_docs.values()])) + __prop.__doc__
+		__prop.__doc__ = sep.join(filter(None, [d for d in bases_docs.values()])) + sep + inspect.getdoc(__prop)
 		return __prop
 	
 	if _prop is None:
@@ -110,13 +110,13 @@ def inherit_fields_docstring(
 			__prop.__doc__ = ""
 		bases_docs = get_bases_docs(__prop, bases)
 		if fields is None:
-			__prop.__doc__ = sep.join(filter(None, [d for d in bases_docs.values()])) + __prop.__doc__
+			__prop.__doc__ = sep.join(filter(None, [d for d in bases_docs.values()])) + sep + inspect.getdoc(__prop)
 			return __prop
 		# bases_fields = {k: walk_docstring(v) for k, v in bases_docs.items()}
 		# bases_fields_filtered = {k: {f: v[f] for f in fields if f in v} for k, v in bases_fields.items()}
 		bases_fields = {k: {f: get_field_from_docstring(v, f) for f in fields} for k, v in bases_docs.items()}
-		self_fields = walk_docstring(__prop.__doc__)
-		doc_wo_fields = deepcopy(__prop.__doc__)
+		self_fields = walk_docstring(inspect.getdoc(__prop))
+		doc_wo_fields = deepcopy(inspect.getdoc(__prop))
 		for field in fields:
 			for subfield in self_fields[field]:
 				subfield_doc = format_field(field, subfield)
