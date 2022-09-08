@@ -2,8 +2,6 @@ import inspect
 from collections import defaultdict
 from copy import deepcopy
 from typing import Optional, Union, Type, List, Dict
-from docutils.core import publish_doctree
-import docutils.nodes
 
 
 def get_bases_docs(prop, bases: Optional[Union[Type, List[Type]]] = None) -> Dict[str, str]:
@@ -134,6 +132,9 @@ def format_field(field_name: str, field_doc: str) -> str:
 
 
 def walk_docstring(doc: str) -> Dict[str, List[str]]:
+	from docutils.core import publish_doctree
+	import docutils.nodes
+	
 	doctree = publish_doctree(doc)
 	
 	class Walker:
