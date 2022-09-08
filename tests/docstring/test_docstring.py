@@ -1,4 +1,5 @@
 import unittest
+import inspect
 import pythonbasictools as pbt
 
 
@@ -29,8 +30,8 @@ class Mock:
 
 
 class TestDocstring(unittest.TestCase):
-	def test_docstring(self):
-		doc = pbt.docstring.get_field_from_docstring(Mock.__doc__, "Attributes")
+	def test_get_field_from_docstring(self):
+		doc = pbt.docstring.get_field_from_docstring(inspect.getdoc(Mock), "Attributes")
 		self.assertTrue(all(
 			[doc[i] == s for i, s in enumerate([
 				"- :attr:`attr1` (int): this is attr1\n"
@@ -38,7 +39,34 @@ class TestDocstring(unittest.TestCase):
 				"- :attr:`attr3` (int): this is attr3\n"
 			])]))
 
-
+	def test_inherit_docstring_empty(self):
+		@pbt.docstring.inherit_docstring(bases=[Mock])
+		class MockChild(Mock):
+			@pbt.docstring.inherit_docstring(bases=Mock)
+			def __init__(self):
+				pass
+		
+		self.assertEqual(inspect.getdoc(MockChild).strip(), inspect.getdoc(Mock).strip())
+		self.assertEqual(inspect.getdoc(MockChild.__init__).strip(), inspect.getdoc(Mock.__init__).strip())
+	
+	def test_inherit_docstring(self):
+		class MockChild(Mock):
+			"""
+			This is the child docstring.
+			"""
+			def __init__(self):
+				"""
+				This is the child init docstring.
+				"""
+				pass
+		
+		child_doc = inspect.getdoc(MockChild).strip()
+		MockChild = pbt.docstring.inherit_docstring(bases=[Mock])(MockChild)
+		self.assertEqual(inspect.getdoc(MockChild).strip(), inspect.getdoc(Mock).strip()+'\n'+child_doc)
+		
+		child_doc = inspect.getdoc(MockChild.__init__).strip()
+		MockChild.__init__ = pbt.docstring.inherit_docstring(bases=[Mock])(MockChild.__init__)
+		self.assertEqual(inspect.getdoc(MockChild.__init__).strip(), inspect.getdoc(Mock.__init__).strip()+'\n'+child_doc)
 
 
 
