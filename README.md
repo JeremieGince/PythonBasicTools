@@ -1,5 +1,11 @@
 # PythonBasicTools
+
 ---------------------------------------------------------------------------
+
+## Documentation
+See the documentation at [https://jeremiegince.github.io/PythonBasicTools/](https://jeremiegince.github.io/PythonBasicTools/).
+
+## Description
 
 This package is a module containing a set of tools useful to any project made with python. 
 It contains tools for:
