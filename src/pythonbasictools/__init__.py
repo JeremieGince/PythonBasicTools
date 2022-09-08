@@ -1,7 +1,10 @@
 __author__ = "Jérémie Gince"
-# repository: https://github.com/JeremieGince/PythonBasicTools
+__email__ = "gincejeremie@gmail.com"
+__copyright__ = "Copyright 2021, Jérémie Gince"
+__license__ = "Apache 2.0"
+__url__ = "https://github.com/JeremieGince/PythonBasicTools"
+__version__ = "0.0.0.1"
 
-from .version import __version__
 from .logging import logs_file_setup
 from .device import DeepLib, log_device_setup
 from .decorators import log_func

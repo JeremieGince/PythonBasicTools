@@ -8,6 +8,8 @@ It contains tools for:
 - Multiprocessing;
 - Progress bar;
 - Sending files to a discord server;
+- Useful decorators;
+- Useful functions for docstrings;
 - And more to come!
 
  ---------------------------------------------------------------------------
