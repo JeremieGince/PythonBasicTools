@@ -4,3 +4,4 @@ tqdm>=4.62.3
 
 docutils~=0.17.1
 pytest~=7.1.2
+karma_sphinx_theme
