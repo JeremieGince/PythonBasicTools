@@ -73,7 +73,6 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.githubpages',
-    'groundwork',
     'sphinxcontrib.bibtex',
 ]
 
@@ -86,5 +85,6 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'groundwork'
+html_theme = 'karma_sphinx_theme'
+# html_theme = 'groundwork'
 html_static_path = ['_static']

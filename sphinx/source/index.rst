@@ -1,13 +1,14 @@
 
 
-Welcome to PythonBasicTools's documentation!
-======================================
+Welcome to PythonBasicTools documentation!
+============================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   modules
+.. include::
+    modules
 
 
 Indices and tables
