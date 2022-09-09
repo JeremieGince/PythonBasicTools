@@ -7,7 +7,6 @@ Welcome to PythonBasicTools documentation!
    :maxdepth: 2
    :caption: Contents:
 
-.. include::
     modules
 
 
