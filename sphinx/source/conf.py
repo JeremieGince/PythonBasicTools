@@ -74,6 +74,7 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.githubpages',
     'sphinxcontrib.bibtex',
+    'sphinx_mdinclude',
 ]
 
 bibtex_bibfiles = ['references.bib']
