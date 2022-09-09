@@ -3,12 +3,12 @@
 
 ---------------------------------------------------------------------------
 
-## Important Links
+# Important Links
 
   - Documentation at [https://jeremiegince.github.io/PythonBasicTools/](https://jeremiegince.github.io/PythonBasicTools/).
   - Github at [https://github.com/JeremieGince/PythonBasicTools/](https://github.com/JeremieGince/PythonBasicTools/).
 
-## Description
+# Description
 
 This package is a module containing a set of tools useful to any project made with python. 
 It contains tools for:
@@ -27,16 +27,17 @@ It contains tools for:
 
 # Installation
 
-## With Wheel:
+## With Wheel
 
    1. Download the .whl file [here](https://github.com/JeremieGince/PythonBasicTools/tree/main/dist/PythonBasicTools-0.0.0.1-py3-none-any.whl);
    2. Copy the path of this file on your computer;
    3. pip install it with ``` pip install [path].whl ```
 
 
-## With pip+git:
+## With pip+git
 
-```console
+
+```bash
 pip install git+https://github.com/JeremieGince/PythonBasicTools
 ```
 
