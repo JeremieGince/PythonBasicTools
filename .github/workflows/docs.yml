@@ -27,6 +27,7 @@ jobs:
         pip install sphinx-theme
         pip install groundwork-sphinx-theme
         pip install karma_sphinx_theme
+        pip install sphinx-mdinclude
         pip install sphinxcontrib-bibtex
 
     - name: Build the sphinx docs
