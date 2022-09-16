@@ -2,6 +2,5 @@ psutil>=5.9.0
 setuptools>=57.0.0
 tqdm>=4.62.3
 
-docutils~=0.17.1
-pytest~=7.1.2
-karma_sphinx_theme
+docutils>=0.17.1
+pytest>=7.1.2
