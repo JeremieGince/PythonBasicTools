@@ -55,6 +55,7 @@ class FileLock:
 		self.lock_path = lock_path
 		self.wait_time = wait_time
 		self.process_name = process_name
+		self._acquired = False
 	
 	def acquire(self):
 		"""
@@ -78,8 +79,16 @@ class FileLock:
 		file_content = f"Process: {self.process_name}\nLock acquired at time {time.time()}"
 		with open(self.lock_path, "w") as f:
 			f.write(file_content)
+		self._acquired = True
 	
 	def __exit__(self, exc_type, exc_val, exc_tb):
-		os.remove(self.lock_path)
+		if self._acquired and os.path.exists(self.lock_path):
+			os.remove(self.lock_path)
+		if self._acquired:
+			self._acquired = False
+		
+	def __del__(self):
+		if self._acquired:
+			self.release()
 
 
