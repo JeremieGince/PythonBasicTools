@@ -1,5 +1,6 @@
 
 # PythonBasicTools
+[![Star on GitHub](https://img.shields.io/github/stars/JeremieGince/PythonBasicTools.svg?style=social)](https://github.com/JeremieGince/PythonBasicTools/stargazers)
 
 ---------------------------------------------------------------------------
 
