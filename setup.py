@@ -1,6 +1,6 @@
 from setuptools import setup
-import pythonbasictools
-from pythonbasictools import __author__, __url__, __email__, __version__, __license__
+from src import pythonbasictools
+from src.pythonbasictools import __author__, __url__, __email__, __version__, __license__
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
