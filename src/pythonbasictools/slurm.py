@@ -1,9 +1,12 @@
 import enum
 import logging
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 class SlurmHostServer(enum.Enum):
+	"""
+	Enum of the different Slurm host server.
+	"""
 	BELUGA = "beluga.computecanada.ca"
 	GRAHAM = "graham.sharcnet.ca"
 	HELIOS = "helios.calculquebec.ca"
@@ -11,16 +14,24 @@ class SlurmHostServer(enum.Enum):
 
 
 def send_slurm_cmd(hostnames, port, username, password, cmd_to_execute):
-	import paramiko
 	"""
 	Send a command to a host.
+	
 	:param hostnames: The hostname of the host to send the command to.
+	:type hostnames: str
 	:param port: The port to connect to.
+	:type port: int
 	:param username: The username to connect with.
+	:type username: str
 	:param password: The password to connect with.
+	:type password: str
 	:param cmd_to_execute: The command to execute.
+	:type cmd_to_execute: str
+	
 	:return: The output of the command.
+	:rtype: str
 	"""
+	import paramiko
 	if not isinstance(hostnames, list):
 		hostnames = [hostnames]
 	opts = []
@@ -40,24 +51,40 @@ def send_slurm_cmd(hostnames, port, username, password, cmd_to_execute):
 
 def generate_slurm_cmd(
 		repository_root: str,
-		credential: Dict[str, str],
+		credential: Optional[Dict[str, str]] = None,
 		bash_file_to_run: str = None,
 		run_count: int = 1,
 		job_to_cancel: str = None,
 ) -> List[str]:
 	"""
 	Generate a command to run on a host.
+	
 	:param repository_root: The root directory of the repository.
-	:param credential: The credential to use.
-		Must be in the format:
-		{
-			"username": "<username>",
-			"password": "<password>"
-		}
+	:type repository_root: str
+	:param credential: The credential to use. If provided, must contain the following key: "username".
+	:type credential: Optional[Dict[str, str]]
 	:param bash_file_to_run: The bash file to run.
+	:type bash_file_to_run: str
 	:param run_count: The number of times to run the bash file.
+	:type run_count: int
 	:param job_to_cancel: The job to cancel.
+	:type job_to_cancel: str
+	
 	:return: The command to run.
+	:rtype: List[str]
+	
+	:Exemple:
+		
+		>>> generate_slurm_cmd(
+		...     repository_root="./GitHub/pythonbasictools",
+		...     credential={
+		...         "username": "user",
+		...         "password": "password"
+		...     },
+		...     bash_file_to_run="./GitHub/pythonbasictools/jobs/test.sh",
+		...     run_count=1,
+		...     job_to_cancel="123456"
+		... )
 	"""
 	cmd = [
 		f"cd {repository_root}",
@@ -69,5 +96,6 @@ def generate_slurm_cmd(
 			cmd.append(f"sbatch {bash_file_to_run}")
 	if job_to_cancel is not None:
 		cmd.append(f"scancel {job_to_cancel}")
-	cmd.append(f"squeue -u {credential['username']}")
+	if credential is not None:
+		cmd.append(f"squeue -u {credential['username']}")
 	return cmd

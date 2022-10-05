@@ -29,6 +29,23 @@ def multiprocess_logger_init():
 
 
 def apply_func_multiprocess(func, iterable_of_args: List[Tuple], nb_workers=-2, **kwargs):
+	"""
+	Apply a function to a list of arguments in parallel.
+	
+	:param func: The function to apply.
+	:type func: Callable
+	:param iterable_of_args: The list of arguments to apply the function to.
+	:type iterable_of_args: List[Tuple]
+	:param nb_workers: The number of workers to use. If -1, use all the logical available CPUs. If -2, use all the
+		available CPUs.
+	:type nb_workers: int
+	:param kwargs: The additional arguments.
+	
+	:keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
+	:keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
+	
+	:return: The list of results.
+	"""
 	import tqdm
 	from multiprocessing import Pool
 	import psutil

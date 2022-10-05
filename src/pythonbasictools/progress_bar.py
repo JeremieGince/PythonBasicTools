@@ -15,15 +15,29 @@ def printProgressBar(
 ):
     """
     Call in a loop to create terminal progress bar
-    @params:
-        iteration   - Required  : current iteration (Int)
-        total       - Required  : total iterations (Int)
-        prefix      - Optional  : prefix string (Str)
-        suffix      - Optional  : suffix string (Str)
-        decimals    - Optional  : positive number of decimals in percent complete (Int)
-        length      - Optional  : character length of bar (Int)
-        fill        - Optional  : bar fill character (Str)
-        printEnd    - Optional  : end character (e.g. "\r", "\r\n") (Str)
+    
+    :param iteration: Current iteration
+    :type iteration: int
+    :param total: Total iterations
+    :type total: int
+    :param prefix: Prefix string
+    :type prefix: str
+    :param suffix: Suffix string
+    :type suffix: str
+    :param decimals: Positive number of decimals in percent complete
+    :type decimals: int
+    :param length: Character length of bar
+    :type length: int
+    :param fill: Bar fill character
+    :type fill: str
+    :param printEnd: end parameter of the print function
+    :type printEnd: str
+    :param current_elapse_seconds: The current elapsed time in seconds.
+    :type current_elapse_seconds: float
+    :param log_func: The logging function to use to log the function call.
+    :type log_func: Callable
+    
+    :return: None
     """
     import warnings
     import os

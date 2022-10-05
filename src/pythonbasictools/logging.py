@@ -2,6 +2,21 @@ import logging
 
 
 def logs_file_setup(file: str, level=logging.INFO, root_logs_dir: str = "./", add_stdout: bool = True):
+	"""
+	Set up the logs file.
+	
+	:param file: The logs file name.
+	:type file: str
+	:param level: The level of the logs.
+	:type level: int
+	:param root_logs_dir: The root directory of the logs.
+	:type root_logs_dir: str
+	:param add_stdout: Whether to add the stdout handler.
+	:type add_stdout: bool
+	
+	:return: The logs file path.
+	:rtype: str
+	"""
 	import os
 	import sys
 	import time

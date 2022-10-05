@@ -2,6 +2,14 @@ import logging
 
 
 def send_logs_file_to_discord(webhook_urls: str):
+    """
+    Send the logs file to Discord.
+    
+    :param webhook_urls: The webhook urls to use to send the logs file.
+    :type webhook_urls: str
+    
+    :return: The result of the request.
+    """
     try:
         from discord_webhook import DiscordWebhook
     except ImportError:
