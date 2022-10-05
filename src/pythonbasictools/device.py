@@ -3,6 +3,9 @@ import logging
 
 
 class DeepLib(enum.Enum):
+    """
+    Enumerate the different deep learning libraries.
+    """
     Null = -1
     Pytorch = 0
     Tensorflow = 1
@@ -10,6 +13,16 @@ class DeepLib(enum.Enum):
 
 
 def log_device_setup(deepLib: DeepLib = DeepLib.Null, level=logging.INFO):
+    """
+    Log the device setup.
+    
+    :param deepLib: The deep learning library to use.
+    :type deepLib: DeepLib
+    :param level: The logging level to use.
+    :type level: int
+    
+    :return: None
+    """
     import sys
     import psutil
     import multiprocessing
@@ -28,6 +41,14 @@ def log_device_setup(deepLib: DeepLib = DeepLib.Null, level=logging.INFO):
 
 
 def log_pytorch_device_setup(level=logging.INFO):
+    """
+    Log the Pytorch device setup.
+    
+    :param level: The logging level to use.
+    :type level: int
+    
+    :return: None
+    """
     from subprocess import check_output
     import torch
 
@@ -57,6 +78,14 @@ def log_pytorch_device_setup(level=logging.INFO):
 
 
 def log_tensorflow_device_setup(level=logging.INFO):
+    """
+    Log the Tensorflow device setup.
+    
+    :param level: The logging level to use.
+    :type level: int
+    
+    :return: None
+    """
     import tensorflow as tf
     from subprocess import check_output
     logging.info(f'__tensorflow VERSION:{tf.__version__}')
@@ -76,6 +105,14 @@ def log_tensorflow_device_setup(level=logging.INFO):
 
 
 def set_tf_loglevel(level=logging.INFO):
+    """
+    Set the Tensorflow log level.
+    
+    :param level: The logging level to use.
+    :type level: int
+    
+    :return: None
+    """
     import os
     if level >= logging.FATAL:
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
@@ -89,6 +126,14 @@ def set_tf_loglevel(level=logging.INFO):
 
 
 def log_sklearn_device_setup(level=logging.INFO):
+    """
+    Log the SkLearn device setup.
+    
+    :param level: The logging level to use.
+    :type level: int
+    
+    :return: None
+    """
     import sklearn
     logging.info(f'__sklearn VERSION:{sklearn.__version__}')
 
