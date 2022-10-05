@@ -28,6 +28,12 @@ It contains tools for:
 
 # Installation
 
+## With PyPI:
+
+```bash
+pip install pythonbasictools
+```
+
 ## With wheel
 
    1. Download the .whl file [here](https://github.com/JeremieGince/PythonBasicTools/tree/main/dist/PythonBasicTools-0.0.0.1-py3-none-any.whl);
