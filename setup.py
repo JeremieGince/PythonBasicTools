@@ -1,5 +1,6 @@
 from setuptools import setup
-from src.pythonbasictools import __author__, __url__, __email__, __version__, __license__
+import pythonbasictools
+from pythonbasictools import __author__, __url__, __email__, __version__, __license__
 import setuptools
 
 with open("README.md", "r", encoding="utf-8") as fh:
@@ -11,7 +12,7 @@ with open("requirements.txt", "r", encoding="utf-8") as fh:
 setup(
     name='PythonBasicTools',
     version=__version__,
-    description="",
+    description=pythonbasictools.__doc__,
     long_description=long_description,
     long_description_content_type="text/markdown",
     url=__url__,
