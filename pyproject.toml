@@ -2,3 +2,56 @@
 pythonpath = [
   ".", "src",
 ]
+
+
+[build-system]
+requires = [
+  "psutil",
+  "setuptools",
+  "tqdm",
+  "docutils",
+  "pytest",
+]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "PythonBasicTools"
+dynamic = ["version", "readme"]
+description = "Python Basic Tools"
+authors = [
+  { name="Jérémie Gince", email="gincejeremie@gmail.com" },
+]
+classifiers = [
+    "Development Status :: Alpha",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.8",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.8"
+dependencies = [
+  "psutil>=5.9.0",
+  "setuptools>=57.0.0",
+  "tqdm>=4.62.3",
+  "docutils>=0.17.1",
+  "pytest>=7.1.2",
+]
+
+[tool.setuptools.dynamic]
+version = {attr = "pythonbasictools.__version__"}
+readme = {file = ["README.md"]}
+
+[project.urls]
+homepage = "https://jeremiegince.github.io/PythonBasicTools/"
+Documentation = "https://jeremiegince.github.io/PythonBasicTools/"
+Source = "https://github.com/JeremieGince/PythonBasicTools"
+
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
