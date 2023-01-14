@@ -10,7 +10,9 @@
 ![Doc Workflow](https://github.com/JeremieGince/PythonBasicTools/actions/workflows/docs.yml/badge.svg)
 ![Publish Workflow](https://github.com/JeremieGince/PythonBasicTools/actions/workflows/publish.yml/badge.svg)
 
+
 --------------------------------------------------------------------------------
+
 
 # Important Links
 
@@ -58,4 +60,5 @@ pip install git+https://github.com/JeremieGince/PythonBasicTools
 
 
 --------------------------------------------------------------------------------
+
 [![Star on GitHub](https://img.shields.io/github/stars/JeremieGince/PythonBasicTools.svg?style=social)](https://github.com/JeremieGince/PythonBasicTools/stargazers)
