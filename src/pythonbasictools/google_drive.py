@@ -1,7 +1,6 @@
 import os
 from typing import Optional, Dict, Any
 import tqdm
-import requests
 
 
 class GoogleDriveDownloader:
@@ -53,6 +52,14 @@ class GoogleDriveDownloader:
 		
 		:return: None
 		"""
+		try:
+			import requests
+		except ImportError:
+			raise ImportError(
+				"The 'requests' package is required to use the GoogleDriveDownloader. "
+				"Install it with 'pip install requests'."
+			)
+		
 		session = requests.Session()
 		params = {'id': self.file_id, 'confirm': 1}
 		if session_params is not None:
