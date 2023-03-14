@@ -11,3 +11,4 @@ from .decorators import log_func
 from .multiprocessing import worker_init, multiprocess_logger_init
 from .slurm import SlurmHostServer, send_slurm_cmd, generate_slurm_cmd
 from . import docstring
+from . import google_drive
