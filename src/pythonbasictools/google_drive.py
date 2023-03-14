@@ -1,5 +1,5 @@
 import os
-from typing import Optional
+from typing import Optional, Dict, Any
 import tqdm
 import requests
 
@@ -47,19 +47,22 @@ class GoogleDriveDownloader:
 		self.skip_existing = skip_existing
 		self.verbose = verbose
 	
-	def download(self):
+	def download(self, session_params: Optional[Dict[str, Any]] = None):
 		"""
 		Download the file.
 		
 		:return: None
 		"""
 		session = requests.Session()
+		params = {'id': self.file_id, 'confirm': 1}
+		if session_params is not None:
+			params.update(session_params)
 		
-		response = session.get(self.DOWNLOAD_URL, params={'id': self.file_id}, stream=True)
+		response = session.get(self.DOWNLOAD_URL, params=params, stream=True)
 		token = self.get_confirm_token(response)
 		
 		if token:
-			params = {'id': self.file_id, 'confirm': token}
+			params.update({'confirm': token})
 			response = session.get(self.DOWNLOAD_URL, params=params, stream=True)
 		
 		self.save_response_content(response)
