@@ -53,7 +53,6 @@ pip install pythonbasictools
 
 ## With pip+git
 
-
 ```bash
 pip install git+https://github.com/JeremieGince/PythonBasicTools
 ```
