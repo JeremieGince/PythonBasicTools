@@ -43,6 +43,7 @@ def apply_func_multiprocess(func, iterable_of_args: List[Tuple], nb_workers=-2, 
 	
 	:keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
 	:keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
+	:keyword bool verbose: Whether to print the progress bar or not. Default to True.
 	
 	:return: The list of results.
 	"""
@@ -61,7 +62,8 @@ def apply_func_multiprocess(func, iterable_of_args: List[Tuple], nb_workers=-2, 
 	with tqdm.tqdm(
 			total=len(iterable_of_args),
 			desc=kwargs.get("desc", None),
-			unit=kwargs.get("unit", "it")
+			unit=kwargs.get("unit", "it"),
+			disable=not kwargs.get("verbose", True),
 	) as pbar:
 		with Pool(nb_workers, worker_init, [q]) as pool:
 			def callback(*args):
