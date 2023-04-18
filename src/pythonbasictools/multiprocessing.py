@@ -97,9 +97,10 @@ def apply_func_multiprocess(
 				pool.apply_async(
 					func,
 					args=args,
+					kwds=kwds,
 					callback=callback
 				)
-				for args in iterable_of_args
+				for args, kwds in zip(iterable_of_args, iterable_of_kwargs)
 			]
 			outputs = [r.get() for r in results]
 
