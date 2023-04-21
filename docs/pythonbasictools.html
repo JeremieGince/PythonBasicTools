@@ -1,0 +1,831 @@
+
+
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>pythonbasictools package &mdash; PythonBasicTools  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  <link rel="stylesheet" href="static/css/theme.min.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/custom.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="static/css/theme.min.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Important Links" href="readme.html" /> 
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <a class="site-nav-toggle hidden-lg-up"><i class="icon-menu"></i></a>
+            <a class="site-title" href="index.html">
+                PythonBasicTools
+            </a>
+        </div>
+    </header>
+
+
+<div class="breadcrumbs-outer hidden-xs-down">
+    <div class="container">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="breadcrumbs">
+    
+      <li><a href="index.html">Docs</a></li>
+        
+      <li>pythonbasictools package</li>
+    
+    
+      <li class="breadcrumbs-aside">
+        
+            
+            <a href="sources/pythonbasictools.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+</div>
+    </div>
+</div>
+    <div class="main-outer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 site-nav">
+                    
+<div role="search">
+    <form class="search" action="search.html" method="get">
+        <div class="icon-input">
+            <input type="text" name="q" placeholder="Search" />
+            <span class="icon-search"></span>
+        </div>
+        <input type="submit" value="Go" class="d-hidden" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+                    <div class="site-nav-tree">
+                        
+                            
+                            
+                                <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="readme.html">Important Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#description">Description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="readme.html#installation">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#with-pypi">With PyPI:</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#with-wheel">With wheel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="readme.html#with-pip-git">With pip+git</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">pythonbasictools package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.decorators">pythonbasictools.decorators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.device">pythonbasictools.device module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.discord">pythonbasictools.discord module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.docstring">pythonbasictools.docstring module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.google_drive">pythonbasictools.google_drive module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.lock">pythonbasictools.lock module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.logging">pythonbasictools.logging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.multiprocessing">pythonbasictools.multiprocessing module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.progress_bar">pythonbasictools.progress_bar module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools.slurm">pythonbasictools.slurm module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-pythonbasictools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+                            
+                        
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <div class="document">
+                        
+                            
+  <section id="pythonbasictools-package">
+<h1>pythonbasictools package<a class="headerlink" href="#pythonbasictools-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-pythonbasictools.decorators">
+<span id="pythonbasictools-decorators-module"></span><h2>pythonbasictools.decorators module<a class="headerlink" href="#module-pythonbasictools.decorators" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.decorators.log_func">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.decorators.</span></span><span class="sig-name descname"><span class="pre">log_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_func=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_length=50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">box_char='-'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logging_func=&lt;function</span> <span class="pre">info&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.decorators.log_func" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the function call and the time it took to execute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_func</strong> (<em>Callable</em>) – The function to decorate.</p></li>
+<li><p><strong>box_length</strong> (<em>int</em>) – The length of the box to use to log the function call.</p></li>
+<li><p><strong>box_char</strong> (<em>str</em>) – The character to use to log the function call.</p></li>
+<li><p><strong>logging_func</strong> (<em>Callable</em>) – The logging function to use to log the function call.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decorated function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.device">
+<span id="pythonbasictools-device-module"></span><h2>pythonbasictools.device module<a class="headerlink" href="#module-pythonbasictools.device" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythonbasictools.device.DeepLib">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">DeepLib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.DeepLib" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enumerate the different deep learning libraries.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.device.DeepLib.Null">
+<span class="sig-name descname"><span class="pre">Null</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></em><a class="headerlink" href="#pythonbasictools.device.DeepLib.Null" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.device.DeepLib.Pytorch">
+<span class="sig-name descname"><span class="pre">Pytorch</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pythonbasictools.device.DeepLib.Pytorch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.device.DeepLib.SkLearn">
+<span class="sig-name descname"><span class="pre">SkLearn</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pythonbasictools.device.DeepLib.SkLearn" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.device.DeepLib.Tensorflow">
+<span class="sig-name descname"><span class="pre">Tensorflow</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#pythonbasictools.device.DeepLib.Tensorflow" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.device.log_device_setup">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">log_device_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deepLib</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pythonbasictools.device.DeepLib" title="pythonbasictools.device.DeepLib"><span class="pre">DeepLib</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DeepLib.Null</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.log_device_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the device setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>deepLib</strong> (<a class="reference internal" href="#pythonbasictools.device.DeepLib" title="pythonbasictools.device.DeepLib"><em>DeepLib</em></a>) – The deep learning library to use.</p></li>
+<li><p><strong>level</strong> (<em>int</em>) – The logging level to use.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.device.log_pytorch_device_setup">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">log_pytorch_device_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.log_pytorch_device_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the Pytorch device setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – The logging level to use.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.device.log_sklearn_device_setup">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">log_sklearn_device_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.log_sklearn_device_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the SkLearn device setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – The logging level to use.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.device.log_tensorflow_device_setup">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">log_tensorflow_device_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.log_tensorflow_device_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the Tensorflow device setup.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – The logging level to use.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.device.set_tf_loglevel">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.device.</span></span><span class="sig-name descname"><span class="pre">set_tf_loglevel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.device.set_tf_loglevel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the Tensorflow log level.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>level</strong> (<em>int</em>) – The logging level to use.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.discord">
+<span id="pythonbasictools-discord-module"></span><h2>pythonbasictools.discord module<a class="headerlink" href="#module-pythonbasictools.discord" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.discord.send_files_to_discord">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.discord.</span></span><span class="sig-name descname"><span class="pre">send_files_to_discord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">webhook_urls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_paths</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.discord.send_files_to_discord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the logs file to Discord.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>webhook_urls</strong> (<em>str</em>) – The webhook urls to use to send the files.</p></li>
+<li><p><strong>file_paths</strong> (<em>Union</em><em>[</em><em>str</em><em>, </em><em>List</em><em>[</em><em>str</em><em>]</em><em>]</em>) – The file paths to send.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.discord.send_logs_file_to_discord">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.discord.</span></span><span class="sig-name descname"><span class="pre">send_logs_file_to_discord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">webhook_urls</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.discord.send_logs_file_to_discord" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the logs file to Discord.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>webhook_urls</strong> (<em>str</em>) – The webhook urls to use to send the logs file.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The result of the request.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.docstring">
+<span id="pythonbasictools-docstring-module"></span><h2>pythonbasictools.docstring module<a class="headerlink" href="#module-pythonbasictools.docstring" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.format_field">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">format_field</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pythonbasictools.docstring.format_field" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.get_bases_docs">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">get_bases_docs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pythonbasictools.docstring.get_bases_docs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the docstring of the parent class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prop</strong> (<em>Any</em>) – The object to find the parent class of.</p></li>
+<li><p><strong>bases</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>, </em><em>List</em><em>[</em><em>Type</em><em>]</em><em>]</em><em>]</em>) – The list of base classes to inherit the docstring from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A dictionary of the docstring of the parent class. The key is the name of the parent class and
+the value is the docstring of the parent class.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dict[str, str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.get_field_from_docstring">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">get_field_from_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pythonbasictools.docstring.get_field_from_docstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all field body associated to a field name in a docstring.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>doc</strong> (<em>str</em>) – The docstring to parse.</p></li>
+<li><p><strong>field_name</strong> (<em>str</em>) – The field name to look for.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The list of field body associated to the field name.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.inherit_docstring">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">inherit_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.docstring.inherit_docstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to add the docstring of the parent class to the child class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_prop</strong> – The object to decorate.</p></li>
+<li><p><strong>sep</strong> (<em>str</em>) – The separator to use between the docstring of the parent and the child.</p></li>
+<li><p><strong>bases</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>, </em><em>List</em><em>[</em><em>Type</em><em>]</em><em>]</em><em>]</em>) – The list of base classes to inherit the docstring from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decorated object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.inherit_fields_docstring">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">inherit_fields_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_prop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'\n'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bases</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Type</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.docstring.inherit_fields_docstring" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inherit the fields of the parents docstrings and add it to the child fields.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>_prop</strong> (<em>Any</em>) – The object to decorate.</p></li>
+<li><p><strong>sep</strong> (<em>str</em>) – The separator to use between the docstring of the parent and the child.</p></li>
+<li><p><strong>bases</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>Type</em><em>, </em><em>List</em><em>[</em><em>Type</em><em>]</em><em>]</em><em>]</em>) – The list of base classes to inherit the docstring from.</p></li>
+<li><p><strong>fields</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><em>List</em><em>[</em><em>str</em><em>]</em><em>, </em><em>str</em><em>]</em><em>]</em>) – The list of fields to inherit. If the fields is a string, it will be converted to a list by splitting
+the string by the ‘,’ character. If the fields is None, it will be set to all found fields.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The decorated object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.docstring.walk_docstring">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.docstring.</span></span><span class="sig-name descname"><span class="pre">walk_docstring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pythonbasictools.docstring.walk_docstring" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pythonbasictools.google_drive">
+<span id="pythonbasictools-google-drive-module"></span><h2>pythonbasictools.google_drive module<a class="headerlink" href="#module-pythonbasictools.google_drive" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonbasictools.google_drive.</span></span><span class="sig-name descname"><span class="pre">GoogleDriveDownloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32768</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_existing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Object used to download a file from Google Drive.</p>
+<dl class="field-list">
+<dt class="field-odd">Exemple<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gdd</span> <span class="o">=</span> <span class="n">GoogleDriveDownloader</span><span class="p">(</span><span class="n">file_id</span><span class="o">=</span><span class="s1">&#39;[file id]&#39;</span><span class="p">,</span> <span class="n">dest_path</span><span class="o">=</span><span class="s1">&#39;data.zip&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gdd</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader.DOWNLOAD_URL">
+<span class="sig-name descname"><span class="pre">DOWNLOAD_URL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://docs.google.com/uc?export=download'</span></em><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader.DOWNLOAD_URL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dest_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">32768</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skip_existing</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new GoogleDriveDownloader object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_id</strong> – The ID of the file to download. This is the part of the URL after the “/d/” and before the “/view”
+in the URL of the file in Google Drive.</p></li>
+<li><p><strong>dest_path</strong> – The path to save the downloaded file to.</p></li>
+<li><p><strong>chunk_size</strong> – The chunk size to use when downloading the file.</p></li>
+<li><p><strong>skip_existing</strong> – If True, the file will not be downloaded if it already exists at the destination path.</p></li>
+<li><p><strong>verbose</strong> – If True, the download progress will be printed to the console.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader.download">
+<span class="sig-name descname"><span class="pre">download</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader.download" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader.get_confirm_token">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_confirm_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader.get_confirm_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.google_drive.GoogleDriveDownloader.save_response_content">
+<span class="sig-name descname"><span class="pre">save_response_content</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.google_drive.GoogleDriveDownloader.save_response_content" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.lock">
+<span id="pythonbasictools-lock-module"></span><h2>pythonbasictools.lock module<a class="headerlink" href="#module-pythonbasictools.lock" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythonbasictools.lock.FileLock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonbasictools.lock.</span></span><span class="sig-name descname"><span class="pre">FileLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./lock.lck'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'process'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.lock.FileLock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class used to lock a process across multiple ones. This can be very useful when you want to use a file across
+multiple different processes or different applications.</p>
+<dl class="field-list">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">lock_path</span></code> (str): The path to the lock file.</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">wait_time</span></code> (float): The time to wait between each check of the lock file in seconds.</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">process_name</span></code> (str): The name of the process.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Methods<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference internal" href="#pythonbasictools.lock.FileLock.acquire" title="pythonbasictools.lock.FileLock.acquire"><code class="xref py py-meth docutils literal notranslate"><span class="pre">acquire()</span></code></a>: Acquire the lock.</p></li>
+<li><p><a class="reference internal" href="#pythonbasictools.lock.FileLock.release" title="pythonbasictools.lock.FileLock.release"><code class="xref py py-meth docutils literal notranslate"><span class="pre">release()</span></code></a>: Release the lock.</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__enter__()</span></code>: Acquire the lock.</p></li>
+<li><p><code class="xref py py-meth docutils literal notranslate"><span class="pre">__exit__()</span></code>: Release the lock.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">FileLock</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># Do something</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lock</span> <span class="o">=</span> <span class="n">FileLock</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lock</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Do something</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lock</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">data_path</span> <span class="o">=</span> <span class="s2">&quot;data.txt&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lock</span> <span class="o">=</span> <span class="n">FileLock</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">lock</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># Do something with data</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span>            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.lock.FileLock.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lock_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./lock.lck'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'process'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.lock.FileLock.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor of the class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lock_path</strong> (<em>str</em>) – The path to the lock file.</p></li>
+<li><p><strong>wait_time</strong> (<em>float</em>) – The time to wait between each check of the lock file in seconds.</p></li>
+<li><p><strong>process_name</strong> (<em>str</em>) – The name of the process.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.lock.FileLock.acquire">
+<span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.lock.FileLock.acquire" title="Permalink to this definition">¶</a></dt>
+<dd><p>Acquire the lock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pythonbasictools.lock.FileLock.release">
+<span class="sig-name descname"><span class="pre">release</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.lock.FileLock.release" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release the lock.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.logging">
+<span id="pythonbasictools-logging-module"></span><h2>pythonbasictools.logging module<a class="headerlink" href="#module-pythonbasictools.logging" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.logging.logs_file_setup">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.logging.</span></span><span class="sig-name descname"><span class="pre">logs_file_setup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_logs_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_stdout</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.logging.logs_file_setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up the logs file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – The logs file name.</p></li>
+<li><p><strong>level</strong> (<em>int</em>) – The level of the logs.</p></li>
+<li><p><strong>root_logs_dir</strong> (<em>str</em>) – The root directory of the logs.</p></li>
+<li><p><strong>add_stdout</strong> (<em>bool</em>) – Whether to add the stdout handler.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The logs file path.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.multiprocessing">
+<span id="pythonbasictools-multiprocessing-module"></span><h2>pythonbasictools.multiprocessing module<a class="headerlink" href="#module-pythonbasictools.multiprocessing" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.multiprocessing.apply_func_main_process">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.multiprocessing.</span></span><span class="sig-name descname"><span class="pre">apply_func_main_process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterable_of_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterable_of_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.multiprocessing.apply_func_main_process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a function to a list of arguments in the main process.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>Callable</em>) – The function to apply.</p></li>
+<li><p><strong>iterable_of_args</strong> (<em>List</em><em>[</em><em>Tuple</em><em>]</em>) – The list of arguments to apply the function to.</p></li>
+<li><p><strong>iterable_of_kwargs</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>Dict</em><em>]</em><em>]</em>) – The list of keyword arguments to apply the function to.</p></li>
+<li><p><strong>kwargs</strong> – The additional arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>desc</strong> (<em>str</em>) – The description of the function to apply. See tqdm.tqdm for more details.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – The unit of the function to apply. See tqdm.tqdm for more details.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print the progress bar or not. Default to True.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The list of results.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the length of iterable_of_args and iterable_of_kwargs are not the same.</p>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythonbasictools.multiprocessing</span> <span class="kn">import</span> <span class="n">apply_func_main_process</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apply_func_main_process</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.multiprocessing.apply_func_multiprocess">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.multiprocessing.</span></span><span class="sig-name descname"><span class="pre">apply_func_multiprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterable_of_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iterable_of_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_workers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-2</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.multiprocessing.apply_func_multiprocess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply a function to a list of arguments in parallel.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>Callable</em>) – The function to apply.</p></li>
+<li><p><strong>iterable_of_args</strong> (<em>List</em><em>[</em><em>Tuple</em><em>]</em>) – The list of arguments to apply the function to.</p></li>
+<li><p><strong>iterable_of_kwargs</strong> (<em>Optional</em><em>[</em><em>List</em><em>[</em><em>Dict</em><em>]</em><em>]</em>) – The list of keyword arguments to apply the function to.</p></li>
+<li><p><strong>nb_workers</strong> (<em>int</em>) – The number of workers to use. If -1, use all the logical available CPUs. If -2, use all the
+available CPUs. If 0, use the main process. If greater than 0, use the specified number of workers.
+Default to -2.</p></li>
+<li><p><strong>kwargs</strong> – The additional arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>desc</strong> (<em>str</em>) – The description of the function to apply. See tqdm.tqdm for more details.</p></li>
+<li><p><strong>unit</strong> (<em>str</em>) – The unit of the function to apply. See tqdm.tqdm for more details.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em>) – Whether to print the progress bar or not. Default to True.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The list of results.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ValueError</strong> – If the length of iterable_of_args and iterable_of_kwargs are not the same.</p></li>
+<li><p><strong>ValueError</strong> – If the number of workers is less than -2.</p></li>
+</ul>
+</dd>
+<dt class="field-odd">Example<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pythonbasictools.multiprocessing</span> <span class="kn">import</span> <span class="n">apply_func_multiprocess</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">apply_func_multiprocess</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.multiprocessing.multiprocess_logger_init">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.multiprocessing.</span></span><span class="sig-name descname"><span class="pre">multiprocess_logger_init</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.multiprocessing.multiprocess_logger_init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.multiprocessing.worker_init">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.multiprocessing.</span></span><span class="sig-name descname"><span class="pre">worker_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.multiprocessing.worker_init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pythonbasictools.progress_bar">
+<span id="pythonbasictools-progress-bar-module"></span><h2>pythonbasictools.progress_bar module<a class="headerlink" href="#module-pythonbasictools.progress_bar" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.progress_bar.printProgressBar">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.progress_bar.</span></span><span class="sig-name descname"><span class="pre">printProgressBar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iteration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">suffix=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decimals=0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length=100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill='█'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">printEnd=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_elapse_seconds=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_func=&lt;built-in</span> <span class="pre">function</span> <span class="pre">print&gt;</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#pythonbasictools.progress_bar.printProgressBar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call in a loop to create terminal progress bar</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iteration</strong> (<em>int</em>) – Current iteration</p></li>
+<li><p><strong>total</strong> (<em>int</em>) – Total iterations</p></li>
+<li><p><strong>prefix</strong> (<em>str</em>) – Prefix string</p></li>
+<li><p><strong>suffix</strong> (<em>str</em>) – Suffix string</p></li>
+<li><p><strong>decimals</strong> (<em>int</em>) – Positive number of decimals in percent complete</p></li>
+<li><p><strong>length</strong> (<em>int</em>) – Character length of bar</p></li>
+<li><p><strong>fill</strong> (<em>str</em>) – Bar fill character</p></li>
+<li><p><strong>printEnd</strong> (<em>str</em>) – end parameter of the print function</p></li>
+<li><p><strong>current_elapse_seconds</strong> (<em>float</em>) – The current elapsed time in seconds.</p></li>
+<li><p><strong>log_func</strong> (<em>Callable</em>) – The logging function to use to log the function call.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The progress bar string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools.slurm">
+<span id="pythonbasictools-slurm-module"></span><h2>pythonbasictools.slurm module<a class="headerlink" href="#module-pythonbasictools.slurm" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.SlurmHostServer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pythonbasictools.slurm.</span></span><span class="sig-name descname"><span class="pre">SlurmHostServer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.slurm.SlurmHostServer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of the different Slurm host server.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.SlurmHostServer.BELUGA">
+<span class="sig-name descname"><span class="pre">BELUGA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'beluga.computecanada.ca'</span></em><a class="headerlink" href="#pythonbasictools.slurm.SlurmHostServer.BELUGA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.SlurmHostServer.CEDAR">
+<span class="sig-name descname"><span class="pre">CEDAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'cedar.computecanada.ca'</span></em><a class="headerlink" href="#pythonbasictools.slurm.SlurmHostServer.CEDAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.SlurmHostServer.GRAHAM">
+<span class="sig-name descname"><span class="pre">GRAHAM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'graham.sharcnet.ca'</span></em><a class="headerlink" href="#pythonbasictools.slurm.SlurmHostServer.GRAHAM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.SlurmHostServer.HELIOS">
+<span class="sig-name descname"><span class="pre">HELIOS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'helios.calculquebec.ca'</span></em><a class="headerlink" href="#pythonbasictools.slurm.SlurmHostServer.HELIOS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.generate_slurm_cmd">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.slurm.</span></span><span class="sig-name descname"><span class="pre">generate_slurm_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">credential</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bash_file_to_run</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_count</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_to_cancel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pythonbasictools.slurm.generate_slurm_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a command to run on a host.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>repository_root</strong> (<em>str</em>) – The root directory of the repository.</p></li>
+<li><p><strong>credential</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em><em>]</em>) – The credential to use. If provided, must contain the following key: “username”.</p></li>
+<li><p><strong>bash_file_to_run</strong> (<em>str</em>) – The bash file to run.</p></li>
+<li><p><strong>run_count</strong> (<em>int</em>) – The number of times to run the bash file.</p></li>
+<li><p><strong>job_to_cancel</strong> (<em>str</em>) – The job to cancel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The command to run.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[str]</p>
+</dd>
+<dt class="field-even">Exemple<span class="colon">:</span></dt>
+<dd class="field-even"><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">generate_slurm_cmd</span><span class="p">(</span>
+<span class="gp">... </span>    <span class="n">repository_root</span><span class="o">=</span><span class="s2">&quot;./GitHub/pythonbasictools&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">credential</span><span class="o">=</span><span class="p">{</span>
+<span class="gp">... </span>        <span class="s2">&quot;username&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+<span class="gp">... </span>        <span class="s2">&quot;password&quot;</span><span class="p">:</span> <span class="s2">&quot;password&quot;</span>
+<span class="gp">... </span>    <span class="p">},</span>
+<span class="gp">... </span>    <span class="n">bash_file_to_run</span><span class="o">=</span><span class="s2">&quot;./GitHub/pythonbasictools/jobs/test.sh&quot;</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">run_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">job_to_cancel</span><span class="o">=</span><span class="s2">&quot;123456&quot;</span>
+<span class="gp">... </span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pythonbasictools.slurm.send_slurm_cmd">
+<span class="sig-prename descclassname"><span class="pre">pythonbasictools.slurm.</span></span><span class="sig-name descname"><span class="pre">send_slurm_cmd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hostnames</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmd_to_execute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pythonbasictools.slurm.send_slurm_cmd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a command to a host.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hostnames</strong> (<em>str</em>) – The hostname of the host to send the command to.</p></li>
+<li><p><strong>port</strong> (<em>int</em>) – The port to connect to.</p></li>
+<li><p><strong>username</strong> (<em>str</em>) – The username to connect with.</p></li>
+<li><p><strong>password</strong> (<em>str</em>) – The password to connect with.</p></li>
+<li><p><strong>cmd_to_execute</strong> (<em>str</em>) – The command to execute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The output of the command.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pythonbasictools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pythonbasictools" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'',
+            LANGUAGE:'en',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+    <script type="text/javascript" src="static/documentation_options.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <script type="text/javascript" src="static/sphinx_highlight.js"></script>
+    <script type="text/javascript" src="static/js/theme.js"></script>
+  
+    <div class="footer" role="contentinfo">
+        <div class="container">
+            &#169; Copyright 2021, Jérémie Gince.
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 6.1.3.
+        </div>
+    </div>  
+
+</body>
+</html>

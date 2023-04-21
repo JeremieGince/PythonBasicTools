@@ -1,0 +1,13 @@
+objects.inv
+modules.html
+index.html
+sources
+static
+search.html
+readme.html
+.nojekyll
+.buildinfo
+pythonbasictools.html
+searchindex.js
+py-modindex.html
+genindex.html
