@@ -12,7 +12,7 @@ def printProgressBar(
         printEnd='',
         current_elapse_seconds=None,
         log_func=print,
-):
+) -> str:
     """
     Call in a loop to create terminal progress bar
     
@@ -37,17 +37,18 @@ def printProgressBar(
     :param log_func: The logging function to use to log the function call.
     :type log_func: Callable
     
-    :return: None
+    :return: The progress bar string.
     """
     import warnings
     import os
+    import time
 
     os.getpid()
 
     if iteration > total:
         warnings.warn("progress bar not use properly: iteration > total")
-        return
-    import time
+        return ""
+    
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
@@ -66,7 +67,7 @@ def printProgressBar(
         log_func('\r'+progress_bar.replace(fill, '#'))
     else:
         log_func('\r' + progress_bar, end=printEnd)
-
+    return progress_bar
 
 
 
