@@ -30,16 +30,16 @@ def multiprocess_logger_init():
 
 def _make_callable_from_list(list_of_callable: List[Callable] = None):
     """
-	Make a callable from a list of callable.
+    Make a callable from a list of callable.
 
-	:param list_of_callable: The list of callable.
-	:type list_of_callable: List[Callable]
+    :param list_of_callable: The list of callable.
+    :type list_of_callable: List[Callable]
 
-	:return: The callable.
-	:rtype: Callable
+    :return: The callable.
+    :rtype: Callable
 
-	:raises ValueError: If the list_of_callable contains a non-callable.
-	"""
+    :raises ValueError: If the list_of_callable contains a non-callable.
+    """
     if list_of_callable is None:
         list_of_callable = []
 
@@ -61,32 +61,32 @@ def apply_func_main_process(
         **kwargs
 ):
     """
-	Apply a function to a list of arguments in the main process.
+    Apply a function to a list of arguments in the main process.
 
-	:param func: The function to apply.
-	:type func: Callable
-	:param iterable_of_args: The list of arguments to apply the function to.
-	:type iterable_of_args: List[Tuple]
-	:param iterable_of_kwargs: The list of keyword arguments to apply the function to.
-	:type iterable_of_kwargs: Optional[List[Dict]]
-	:param kwargs: The additional arguments.
+    :param func: The function to apply.
+    :type func: Callable
+    :param iterable_of_args: The list of arguments to apply the function to.
+    :type iterable_of_args: List[Tuple]
+    :param iterable_of_kwargs: The list of keyword arguments to apply the function to.
+    :type iterable_of_kwargs: Optional[List[Dict]]
+    :param kwargs: The additional arguments.
 
-	:keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
-	:keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
-	:keyword bool verbose: Whether to print the progress bar or not. Default to True.
-	:keyword List[Callable] callbacks: The list of callbacks to call after each iteration.
+    :keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
+    :keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
+    :keyword bool verbose: Whether to print the progress bar or not. Default to True.
+    :keyword List[Callable] callbacks: The list of callbacks to call after each iteration.
 
-	:return: The list of results.
+    :return: The list of results.
 
-	:raises ValueError: If the length of iterable_of_args and iterable_of_kwargs are not the same.
+    :raises ValueError: If the length of iterable_of_args and iterable_of_kwargs are not the same.
 
-	:Example:
-	>>> from pythonbasictools.multiprocessing import apply_func_main_process
-	>>> def func(x, y):
-	...     return x + y
-	>>> apply_func_main_process(func, [(1, 2), (3, 4)])
-	>>> [3, 7]
-	"""
+    :Example:
+    >>> from pythonbasictools.multiprocessing import apply_func_main_process
+    >>> def func(x, y):
+    ...     return x + y
+    >>> apply_func_main_process(func, [(1, 2), (3, 4)])
+    >>> [3, 7]
+    """
     import tqdm
 
     if iterable_of_kwargs is None:
@@ -123,38 +123,38 @@ def apply_func_multiprocess(
         **kwargs
 ):
     """
-	Apply a function to a list of arguments in parallel.
-	
-	:param func: The function to apply.
-	:type func: Callable
-	:param iterable_of_args: The list of arguments to apply the function to.
-	:type iterable_of_args: List[Tuple]
-	:param iterable_of_kwargs: The list of keyword arguments to apply the function to.
-	:type iterable_of_kwargs: Optional[List[Dict]]
-	:param nb_workers: The number of workers to use. If -1, use all the logical available CPUs. If -2, use all the
-		available CPUs. If 0, use the main process. If greater than 0, use the specified number of workers.
-		Default to -2.
-	:type nb_workers: int
-	:param kwargs: The additional arguments.
-	
-	:keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
-	:keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
-	:keyword bool verbose: Whether to print the progress bar or not. Default to True.
-	:keyword List[Callable] callbacks: The list of callbacks to call after each iteration.
-		See multiprocessing.Pool.apply_async for more details.
-	
-	:return: The list of results.
-	
-	:raises ValueError: If the length of iterable_of_args and iterable_of_kwargs are not the same.
-	:raises ValueError: If the number of workers is less than -2.
-	
-	:Example:
-	>>> from pythonbasictools.multiprocessing import apply_func_multiprocess
-	>>> def func(a, b):
-	...     return a + b
-	>>> apply_func_multiprocess(func, [(1, 2), (3, 4), (5, 6)])
-	>>> [3, 7, 11]
-	"""
+    Apply a function to a list of arguments in parallel.
+
+    :param func: The function to apply.
+    :type func: Callable
+    :param iterable_of_args: The list of arguments to apply the function to.
+    :type iterable_of_args: List[Tuple]
+    :param iterable_of_kwargs: The list of keyword arguments to apply the function to.
+    :type iterable_of_kwargs: Optional[List[Dict]]
+    :param nb_workers: The number of workers to use. If -1, use all the logical available CPUs. If -2, use all the
+        available CPUs. If 0, use the main process. If greater than 0, use the specified number of workers.
+        Default to -2.
+    :type nb_workers: int
+    :param kwargs: The additional arguments.
+
+    :keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
+    :keyword str unit: The unit of the function to apply. See tqdm.tqdm for more details.
+    :keyword bool verbose: Whether to print the progress bar or not. Default to True.
+    :keyword List[Callable] callbacks: The list of callbacks to call after each iteration.
+        See multiprocessing.Pool.apply_async for more details.
+
+    :return: The list of results.
+
+    :raises ValueError: If the length of iterable_of_args and iterable_of_kwargs are not the same.
+    :raises ValueError: If the number of workers is less than -2.
+
+    :Example:
+    >>> from pythonbasictools.multiprocessing import apply_func_multiprocess
+    >>> def func(a, b):
+    ...     return a + b
+    >>> apply_func_multiprocess(func, [(1, 2), (3, 4), (5, 6)])
+    >>> [3, 7, 11]
+    """
     import tqdm
     from multiprocessing import Pool
     import psutil
