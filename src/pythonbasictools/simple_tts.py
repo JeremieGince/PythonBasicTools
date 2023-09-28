@@ -90,6 +90,7 @@ def gen_audio_with_pyttsx3(
         raise ImportError("The package pyttsx3 must be installed. You can install it with `pip install pyttsx3`.")
     os.makedirs(os.path.dirname(cache_file), exist_ok=True)
     engine = pyttsx3.init()
+    engine.setVoice(language)
     engine.save_to_file(text, cache_file)
     engine.runAndWait()
     return cache_file
