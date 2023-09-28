@@ -32,10 +32,10 @@ def say(
     try:
         import playsound
     except ImportError:
-        raise ImportError("The package playsound must be installed.")
+        raise ImportError("The package playsound must be installed. You can install it with `pip install playsound`.")
 
     if lib not in known_libs:
-        raise ValueError(f"Unknown lib: {lib}")
+        raise ValueError(f"Unknown lib: {lib}. Known libs: {known_libs.keys()}.")
 
     cache_file = known_libs[lib](text, language, cache_file)
     time.sleep(delay)
@@ -59,7 +59,10 @@ def gen_audio_with_gtts(
 
     :return: The result of the request.
     """
-    import gtts
+    try:
+        import gtts
+    except ImportError:
+        raise ImportError("The package gtts must be installed. You can install it with `pip install gtts`.")
     os.makedirs(os.path.dirname(cache_file), exist_ok=True)
     gtts.gTTS(text, lang=language).save(cache_file)
     return cache_file
@@ -81,7 +84,10 @@ def gen_audio_with_pyttsx3(
 
     :return: The result of the request.
     """
-    import pyttsx3
+    try:
+        import pyttsx3
+    except ImportError:
+        raise ImportError("The package pyttsx3 must be installed. You can install it with `pip install pyttsx3`.")
     os.makedirs(os.path.dirname(cache_file), exist_ok=True)
     engine = pyttsx3.init()
     engine.save_to_file(text, cache_file)
