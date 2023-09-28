@@ -38,3 +38,28 @@ def log_func(_func=None, *, box_length=50, box_char='-', logging_func=logging.in
     else:
         return decorator_log_func(_func)
 
+
+def try_func_n_times(_func=None, *, n: int = 32, delay: float = 0.1):
+    def decorator_try_func_n_times(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            out = None
+            for i in range(n):
+                try:
+                    out = func(*args, **kwargs)
+                    break
+                except Exception as e:
+                    if i == n - 1:
+                        raise e
+                    else:
+                        time.sleep(delay)
+            return out
+
+        wrapper.__name__ = func.__name__ + "@log_func"
+        return wrapper
+
+    if _func is None:
+        return decorator_try_func_n_times
+    else:
+        return decorator_try_func_n_times(_func)
+
