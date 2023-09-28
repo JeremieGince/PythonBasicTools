@@ -9,6 +9,7 @@ def say(
         cache_file: str = "./.cache/tts.mp3",
         delay: float = 0.1,
         rm_cache_file: bool = True,
+        raise_error: bool = False,
 ):
     """
     Say the text using the default system voice.
@@ -45,7 +46,10 @@ def say(
     try:
         playsound.playsound(os.path.abspath(cache_file))
     except Exception as e:
-        print(e)
+        if raise_error:
+            raise e
+        else:
+            print(e)
     finally:
         if rm_cache_file:
             if os.path.exists(cache_file):
