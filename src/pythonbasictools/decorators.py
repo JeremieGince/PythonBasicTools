@@ -1,6 +1,7 @@
 import functools
 import logging
 import time
+import threading as th
 
 
 def log_func(_func=None, *, box_length=50, box_char='-', logging_func=logging.info):
@@ -55,11 +56,26 @@ def try_func_n_times(_func=None, *, n: int = 32, delay: float = 0.1):
                         time.sleep(delay)
             return out
 
-        wrapper.__name__ = func.__name__ + "@log_func"
+        wrapper.__name__ = func.__name__ + "@try_func_n_times"
         return wrapper
 
     if _func is None:
         return decorator_try_func_n_times
     else:
         return decorator_try_func_n_times(_func)
+
+
+def run_func_in_thread(_func=None, *, daemon: bool = False):
+    def decorator_run_func_in_thread(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            th.Thread(target=func, args=args, kwargs=kwargs, daemon=daemon).start()
+
+        wrapper.__name__ = func.__name__ + "@run_func_in_thread"
+        return wrapper
+
+    if _func is None:
+        return decorator_run_func_in_thread
+    else:
+        return decorator_run_func_in_thread(_func)
 
