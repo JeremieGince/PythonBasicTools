@@ -8,6 +8,8 @@ def say(
         lib: str = "gtts",
         cache_file: str = "./.cache/tts.mp3",
         delay: float = 0.1,
+        rm_cache_file: bool = True,
+        raise_error: bool = False,
 ):
     """
     Say the text using the default system voice.
@@ -22,6 +24,8 @@ def say(
     :type cache_file: str
     :param delay: delay in seconds to play the audio.
     :type delay: float
+    :param rm_cache_file: Whether to remove the cache file after playing it.
+    :type rm_cache_file: bool
 
     :return: The result of the request.
     """
@@ -39,7 +43,17 @@ def say(
 
     cache_file = known_libs[lib](text, language, cache_file)
     time.sleep(delay)
-    playsound.playsound(os.path.abspath(cache_file))
+    try:
+        playsound.playsound(os.path.abspath(cache_file))
+    except Exception as e:
+        if raise_error:
+            raise e
+        else:
+            print(e)
+    finally:
+        if rm_cache_file:
+            if os.path.exists(cache_file):
+                os.remove(cache_file)
     return cache_file
 
 
