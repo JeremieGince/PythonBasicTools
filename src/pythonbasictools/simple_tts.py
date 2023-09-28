@@ -1,5 +1,6 @@
 import os
 import time
+from .decorators import try_func_n_times
 
 
 def say(
@@ -7,9 +8,10 @@ def say(
         language: str = 'en-US',
         lib: str = "gtts",
         cache_file: str = "./.cache/tts.mp3",
-        delay: float = 0.1,
         rm_cache_file: bool = True,
         raise_error: bool = False,
+        n_trials: int = 32,
+        delay: float = 0.1,
 ):
     """
     Say the text using the default system voice.
@@ -41,10 +43,13 @@ def say(
     if lib not in known_libs:
         raise ValueError(f"Unknown lib: {lib}. Known libs: {known_libs.keys()}.")
 
-    cache_file = known_libs[lib](text, language, cache_file)
-    time.sleep(delay)
+    def trial(_text, _language, _cache_file):
+        _cache_file = known_libs[lib](_text, _language, _cache_file)
+        time.sleep(delay)
+        playsound.playsound(os.path.abspath(_cache_file))
+        return _cache_file
     try:
-        playsound.playsound(os.path.abspath(cache_file))
+        try_func_n_times(trial, n=n_trials, delay=delay)(text, language, cache_file)
     except Exception as e:
         if raise_error:
             raise e
