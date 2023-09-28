@@ -1,6 +1,6 @@
 import os
 import time
-from .decorators import try_func_n_times
+from .decorators import try_func_n_times, run_func_in_thread
 
 
 def say(
@@ -12,6 +12,7 @@ def say(
         raise_error: bool = False,
         n_trials: int = 32,
         delay: float = 0.1,
+        run_in_thread: bool = True,
 ):
     """
     Say the text using the default system voice.
@@ -49,7 +50,10 @@ def say(
         playsound.playsound(os.path.abspath(_cache_file))
         return _cache_file
     try:
-        try_func_n_times(trial, n=n_trials, delay=delay)(text, language, cache_file)
+        if run_in_thread:
+            run_func_in_thread(try_func_n_times(trial, n=n_trials, delay=delay))(text, language, cache_file)
+        else:
+            try_func_n_times(trial, n=n_trials, delay=delay)(text, language, cache_file)
     except Exception as e:
         if raise_error:
             raise e
