@@ -15,3 +15,4 @@ from . import google_drive
 from . import lock
 from . import discord
 from .simple_tts import say
+from . import cmds
