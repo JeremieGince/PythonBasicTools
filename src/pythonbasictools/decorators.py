@@ -63,3 +63,29 @@ def try_func_n_times(_func=None, *, n: int = 32, delay: float = 0.1):
     else:
         return decorator_try_func_n_times(_func)
 
+
+def save_on_exit(save_func_name="to_pickle", *save_args, **save_kwargs):
+    """
+    Decorator for a method that saves the object on exit.
+
+    :param save_func_name: The name of the method that saves the object.
+    :type save_func_name: str
+    :param save_args: The arguments of the save method.
+    :type save_args: tuple
+    :param save_kwargs: The keyword arguments of the save method.
+    :return: The decorated method.
+    """
+    
+    def decorator(method):
+        @functools.wraps(method)
+        def wrapper(self, *args, **kwargs):
+            try:
+                return method(self, *args, **kwargs)
+            finally:
+                if not hasattr(self, save_func_name):
+                    raise AttributeError(
+                        f"The object {self.__class__.__name__} does not have a save method named {save_func_name}."
+                    )
+                getattr(self, save_func_name)(*save_args, **save_kwargs)
+        
+        return wrapper
