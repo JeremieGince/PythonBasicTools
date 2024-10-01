@@ -17,3 +17,4 @@ from . import discord
 from .simple_tts import say
 from . import cmds
 from .run_output_file import RunOutputFile
+from .hash_tools import hash_dict
