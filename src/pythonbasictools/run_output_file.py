@@ -2,14 +2,16 @@ import datetime
 import logging
 import os
 from collections import defaultdict
-from typing import Dict, Any
+from typing import Dict, Any, Optional, List
+import json
+from .collections_tools import ravel_dict
+from .multiprocessing_tools import apply_func_multiprocess
 
 import pandas as pd
 
 
 class RunOutputFile:
     """
-
     This object is used to save and load data of a script run to a JSON file. The data is saved as a dictionary and can
     be accessed as an attribute of the object. The data is saved to a JSON file in the output directory of the script.
     It is useful when you want to store some data or state of the script run to a file and load it later.
@@ -43,6 +45,76 @@ class RunOutputFile:
     """
     EXT: str = ".out.json"
     DEFAULT_FILENAME: str = "run_output"
+    RAVEL_DICT_KEY_SEP = "."  # The separator used to ravel the dictionary
+
+    @classmethod
+    def parse_results_from_dir_to_dataframe(
+            cls,
+            root_dir: str,
+            requires_columns: Optional[List[str]] = None,
+            file_column: str = "_file",
+            mp_kwargs: Optional[Dict[str, Any]] = None,
+    ) -> pd.DataFrame:
+        """
+        Parse the results from a root directory. If requires_columns is not None, the rows that do not contain all the
+        required columns will be removed.
+
+        :param root_dir: The directory containing the results.
+        :type root_dir: str
+        :param requires_columns: The columns that are required in the DataFrame. If None, no columns are required.
+            If a row does not contain all the required columns, it will be removed from the final DataFrame.
+        :type requires_columns: Optional[List[str]]
+        :param file_column: The name of the column that contains the file path.
+        :type file_column: str
+        :param mp_kwargs: The keyword arguments to pass to the multiprocessing function.
+        :type mp_kwargs: Optional[Dict[str, Any]]
+        :return: The DataFrame containing the results.
+        """
+        if mp_kwargs is None:
+            mp_kwargs = {}
+        all_files = [
+            os.path.join(root, file)
+            for root, _, files in os.walk(root_dir)
+            for file in files
+            if file.endswith(cls.EXT)
+        ]
+        results = apply_func_multiprocess(
+            func=cls.raveled_state_from_file,
+            iterable_of_args=[(file, False) for file in all_files],
+            iterable_of_kwargs=[{"save_every_set": False, file_column: file} for file in all_files],
+            desc=f"Processing files '{cls.EXT}' in {os.path.abspath(root_dir)}",
+            **mp_kwargs
+        )
+        df = pd.DataFrame(results)
+        if requires_columns is not None:
+            df = df.dropna(subset=requires_columns)
+        return df
+
+    @classmethod
+    def raveled_state_from_file(
+            cls,
+            path: str,
+            raise_on_error: bool = False,
+            **kwargs
+    ) -> dict:
+        """
+        Get the raveled state of the data in the file.
+
+        :param path: The path to the file.
+        :type path: str
+        :param raise_on_error: If True, raise an error if an error occurs while loading the file.
+            If False, return an empty dictionary if an error occurs.
+        :type raise_on_error: bool
+        :param kwargs: Additional keyword arguments.
+        :return: The raveled state of the data in the file.
+        :rtype: dict
+        """
+        try:
+            return cls.from_file(path, **kwargs).raveled_state
+        except Exception as e:
+            if raise_on_error:
+                raise e
+            return {}
 
     def __init__(
             self,
@@ -70,6 +142,10 @@ class RunOutputFile:
     @property
     def exists(self):
         return os.path.exists(self.path)
+
+    @property
+    def raveled_state(self):
+        return self.get_raveled_state()
 
     @classmethod
     def from_file(cls, path: str, **kwargs):
@@ -174,7 +250,10 @@ class RunOutputFile:
 
     def load_if_exists(self):
         if self.exists:
-            self.load()
+            try:
+                self.load()
+            except (json.JSONDecodeError, FileNotFoundError):
+                pass
         return self
 
     def as_dataframe(self, add_path: bool = True) -> pd.DataFrame:
@@ -188,6 +267,14 @@ class RunOutputFile:
         if add_path:
             data[f"{self.EXT}_path"] = self.path
         return pd.Series(data)
+
+    def get_raveled_state(self, key_sep: Optional[str] = None):
+        if key_sep is None:
+            key_sep = self.RAVEL_DICT_KEY_SEP
+        raveled_state = self.data.copy()
+        raveled_state.update(self.slurm_env_vars)
+        raveled_state.update(self.slurm_ressources)
+        return ravel_dict(raveled_state, key_sep=key_sep)
 
     def log(self, msg: str, level=logging.INFO, print_msg: bool = True, **kwargs):
         import warnings
