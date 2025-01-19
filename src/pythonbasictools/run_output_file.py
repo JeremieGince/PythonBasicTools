@@ -146,7 +146,8 @@ class RunOutputFile:
 
     def save(self):
         import json
-        os.makedirs(self.output_dir, exist_ok=True)
+        if self.output_dir:
+            os.makedirs(self.output_dir, exist_ok=True)
         save_data = self.__getstate__()
         with open(self.path, "w") as f:
             json.dump(save_data, f, indent=4)
