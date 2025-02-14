@@ -18,3 +18,8 @@ from .simple_tts import say
 from . import cmds
 from .run_output_file import RunOutputFile
 from .hash_tools import hash_dict
+from .collections_tools import (
+    ravel_dict,
+    sequence_get,
+    list_insert_replace_at,
+)
