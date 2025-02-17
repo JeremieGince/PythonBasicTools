@@ -60,6 +60,8 @@ def list_insert_replace_at(__list: List, idx: int, value: Any, default: Any = No
     :return: The new list.
     :rtype: List
     """
+    if idx < 0:
+        idx = max(0, len(__list) + idx)
     if idx < len(__list):
         __list[idx] = value
     else:
