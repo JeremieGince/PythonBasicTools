@@ -58,6 +58,7 @@ def apply_func_main_process(
         func,
         iterable_of_args: List[Tuple],
         iterable_of_kwargs: Optional[List[Dict]] = None,
+        tqdm_options: Optional[Dict] = None,
         **kwargs
 ):
     """
@@ -69,6 +70,8 @@ def apply_func_main_process(
     :type iterable_of_args: List[Tuple]
     :param iterable_of_kwargs: The list of keyword arguments to apply the function to.
     :type iterable_of_kwargs: Optional[List[Dict]]
+    :param tqdm_options: The options for tqdm.tqdm.
+    :type tqdm_options: Optional[Dict]
     :param kwargs: The additional arguments.
 
     :keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
@@ -89,6 +92,7 @@ def apply_func_main_process(
     """
     import tqdm
 
+    tqdm_options = tqdm_options or {}
     if iterable_of_kwargs is None:
         iterable_of_kwargs = [{} for _ in range(len(iterable_of_args))]
 
@@ -104,6 +108,7 @@ def apply_func_main_process(
             desc=kwargs.get("desc", None),
             unit=kwargs.get("unit", "it"),
             disable=not kwargs.get("verbose", True),
+            **tqdm_options
     ) as pbar:
         callback = _make_callable_from_list(list_of_callbacks)
         results = []
@@ -120,6 +125,7 @@ def apply_func_multiprocess(
         iterable_of_args: List[Tuple],
         iterable_of_kwargs: Optional[List[Dict]] = None,
         nb_workers=-2,
+        tqdm_options: Optional[Dict] = None,
         **kwargs
 ):
     """
@@ -135,6 +141,8 @@ def apply_func_multiprocess(
         available CPUs. If 0, use the main process. If greater than 0, use the specified number of workers.
         Default to -2.
     :type nb_workers: int
+    :param tqdm_options: The options for tqdm.tqdm.
+    :type tqdm_options: Optional[Dict]
     :param kwargs: The additional arguments.
 
     :keyword str desc: The description of the function to apply. See tqdm.tqdm for more details.
@@ -159,6 +167,7 @@ def apply_func_multiprocess(
     from multiprocessing import Pool
     import psutil
 
+    tqdm_options = tqdm_options or {}
     if nb_workers is None:
         nb_workers = -2
 
@@ -168,7 +177,7 @@ def apply_func_multiprocess(
         nb_workers = psutil.cpu_count(logical=False)
 
     if nb_workers == 0:
-        return apply_func_main_process(func, iterable_of_args, iterable_of_kwargs, **kwargs)
+        return apply_func_main_process(func, iterable_of_args, iterable_of_kwargs, tqdm_options, **kwargs)
 
     if nb_workers < 0:
         raise ValueError("The number of workers must be greater or equal than 0.")
@@ -179,6 +188,7 @@ def apply_func_multiprocess(
     if len(iterable_of_args) != len(iterable_of_kwargs):
         raise ValueError("The length of iterable_of_args and iterable_of_kwargs must be the same.")
 
+    nb_workers = min(nb_workers, len(iterable_of_args))
     q_listener, q = multiprocess_logger_init()
 
     with tqdm.tqdm(
@@ -186,6 +196,7 @@ def apply_func_multiprocess(
             desc=kwargs.get("desc", None),
             unit=kwargs.get("unit", "it"),
             disable=not kwargs.get("verbose", True),
+            **tqdm_options
     ) as pbar:
         with Pool(nb_workers, worker_init, [q]) as pool:
             def p_bar_update_callback(*args, **kwds):
