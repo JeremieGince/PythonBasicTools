@@ -106,3 +106,27 @@ def maybe_unpack_singleton_dict(x: Union[dict, Any], default: Any = None) -> Any
     if isinstance(x, dict) and len(x) <= 1:
         return unpack_singleton_dict(x, default=default)
     return x
+
+
+def list_of_dicts_to_dict_of_lists(list_of_dicts: List[dict], default: Any = None) -> dict:
+    """
+    Convert a list of dictionaries to a dictionary of lists.
+    The keys of the dictionaries are used as keys in the dictionary of lists.
+    The values of the dictionaries are inserted into the lists at the same index as the dictionary.
+    This means that every list in the dictionary of lists will have the same length as the list of dictionaries.
+
+    :param list_of_dicts: The list of dictionaries to convert.
+    :type list_of_dicts: List[dict]
+    :param default: The default value to insert if a key is not present in a dictionary.
+    :type default: Any
+
+    :return: The dictionary of lists.
+    :rtype: dict
+    """
+    dict_of_lists = {}
+    for i, d in enumerate(list_of_dicts):
+        for k, v in d.items():
+            dict_of_lists[k] = list_insert_replace_at(dict_of_lists.get(k, []), i, v, default=default)
+    return dict_of_lists
+
+
