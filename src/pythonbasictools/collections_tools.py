@@ -1,4 +1,4 @@
-from typing import Sequence, Any, List
+from typing import Sequence, Any, List, Union, Optional
 
 
 def ravel_dict(d: dict, key_sep: str = ".") -> dict:
@@ -69,3 +69,40 @@ def list_insert_replace_at(__list: List, idx: int, value: Any, default: Any = No
         __list.append(value)
     return __list
 
+
+def unpack_singleton_dict(x: dict, default: Any = None) -> Optional[Any]:
+    """
+    Unpack a dictionary with a single key and value. If the dict has more than one key, a ValueError is raised.
+    If the dict is empty, the default value is returned.
+
+    :param x: The dictionary to unpack.
+    :type x: dict
+    :param default: The default value to return if the dictionary is empty.
+    :type default: Any
+
+    :return: The value of the single key in the dictionary.
+    :rtype: Any
+    """
+    if len(x) > 1:
+        raise ValueError("x must have a length of zero or one.")
+    elif len(x) == 0:
+        return default
+    return x[list(x.keys())[0]]
+
+
+def maybe_unpack_singleton_dict(x: Union[dict, Any], default: Any = None) -> Any:
+    """
+    Accept a dict or any other type. If x is a dict with one key and value, the singleton is unpacked. Otherwise, x is
+    returned without being changed.
+
+    :param x: The value to unpack to maybe unpack.
+    :type x: Union[dict, Any]
+    :param default: The default value to return if the dictionary is empty.
+    :type default: Any
+
+    :return: The unpacked value or the original value.
+    :rtype: Any
+    """
+    if isinstance(x, dict) and len(x) <= 1:
+        return unpack_singleton_dict(x, default=default)
+    return x
