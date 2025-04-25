@@ -1,4 +1,5 @@
-from typing import Sequence, Any, List, Union, Optional
+import itertools
+from typing import Sequence, Any, List, Union, Optional, Dict
 
 
 def ravel_dict(d: dict, key_sep: str = ".") -> dict:
@@ -130,3 +131,69 @@ def list_of_dicts_to_dict_of_lists(list_of_dicts: List[dict], default: Any = Non
     return dict_of_lists
 
 
+def dict_of_lists_to_list_of_dicts(
+        dict_of_lists: Dict
+) -> List[dict]:
+    """
+    Convert a dictionary of lists to a list of dictionaries.
+    The keys of the dictionary are used as keys in the dictionaries.
+    The values of the dictionary are inserted into the dictionaries at the same index as the list.
+
+    :Example:
+        >>> dict_of_lists = {
+        ...    "a": [1, 2, 3],
+        ...    "b": [9, 8, 7],
+        ...    "c": [True, False, True],
+        ...}
+        >>> list_of_dicts = dict_of_lists_to_list_of_dicts(dict_of_lists)
+        >>> print(list_of_dicts)
+        [{'a': 1, 'b': 9, 'c': True}, {'a': 2, 'b': 8, 'c': False}, {'a': 3, 'b': 7, 'c': True}]
+
+    :Note:
+        If the lists in the dictionary have different lengths, the last directories will have less keys than the
+        first ones.
+
+    :param dict_of_lists: The dictionary of lists to convert.
+    :type dict_of_lists: dict
+
+    :return: The list of dictionaries.
+    :rtype: List[dict]
+    """
+    keys = list(dict_of_lists.keys())
+    list_of_dict_of_parameters = []
+    for key in keys:
+        values = dict_of_lists[key]
+        for i, value in enumerate(values):
+            old_dict = sequence_get(list_of_dict_of_parameters, idx=i, default={})
+            new_dict = {**old_dict, key: value}
+            list_insert_replace_at(list_of_dict_of_parameters, i, new_dict, default={})
+    return list_of_dict_of_parameters
+
+
+def dict_of_lists_to_product_list_of_dicts(
+        dict_of_lists: Dict
+) -> List[dict]:
+    """
+    Convert a dictionary of lists to a list of dictionaries as the Cartesian product of the lists.
+
+    :Example:
+        >>> dict_of_lists = {
+        ...    "a": [1, 2],
+        ...    "b": [9, 8],
+        ...}
+        >>> list_of_dicts = dict_of_lists_to_product_dict_of_lists(dict_of_lists)
+        >>> print(list_of_dicts)
+        [{'a': 1, 'b': 9}, {'a': 1, 'b': 8}, {'a': 2, 'b': 9}, {'a': 2, 'b': 8}]
+
+    :param dict_of_lists: The dictionary of lists to convert.
+    :type dict_of_lists: dict
+
+    :return: The list of dictionaries.
+    :rtype: List[dict]
+    """
+    keys = list(dict_of_lists.keys())
+    list_of_dict_of_parameters = [
+        dict(zip(keys, values))
+        for values in itertools.product(*[dict_of_lists[key] for key in keys])
+    ]
+    return list_of_dict_of_parameters
