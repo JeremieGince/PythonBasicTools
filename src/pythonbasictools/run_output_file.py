@@ -272,8 +272,6 @@ class RunOutputFile:
         if key_sep is None:
             key_sep = self.RAVEL_DICT_KEY_SEP
         raveled_state = self.data.copy()
-        raveled_state.update(self.slurm_env_vars)
-        raveled_state.update(self.slurm_ressources)
         return ravel_dict(raveled_state, key_sep=key_sep)
 
     def log(self, msg: str, level=logging.INFO, print_msg: bool = True, **kwargs):
