@@ -197,9 +197,16 @@ class RunOutputFile:
         _str += f"\n\nSaved to: {self.path}"
         return _str
 
-    def update(self, other):
+    def update(
+            self,
+            other: Dict[str, Any],
+            print_updated: bool = True,
+            print_header: str = "New Data",
+    ):
         self.data.update(other)
         self.save_if_save_every_set()
+        if print_updated:
+            print(f"{print_header}:\n{json.dumps(other, indent=4, default=str)}\n")
         return self
 
     def save_if_save_every_set(self):
@@ -213,6 +220,7 @@ class RunOutputFile:
             "data": self.data,
             "logs": self.logs,
             f"path": self.path,
+            "ENV": dict(os.environ),
         }
 
     def __setstate__(self, state: Dict[str, Any]):
