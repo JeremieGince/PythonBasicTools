@@ -98,7 +98,7 @@ exclude_also = [
 [[tool.mypy.overrides]]
 module = [
     "tqdm",
-    
+
 ]
 ignore_missing_imports = true
 
