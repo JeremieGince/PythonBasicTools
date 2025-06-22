@@ -1,6 +1,6 @@
-import pythonbasictools as pbt
 import pytest
 
+import pythonbasictools as pbt
 
 handmade_dict_of_lists = [
     ({"a": [1, 2, 3], "b": [9, 8, 7]}, [{"a": 1, "b": 9}, {"a": 2, "b": 8}, {"a": 3, "b": 7}]),
@@ -11,7 +11,8 @@ handmade_dict_of_lists = [
 
 
 @pytest.mark.parametrize(
-    "inputs, expected_output", handmade_dict_of_lists,
+    "inputs, expected_output",
+    handmade_dict_of_lists,
 )
 def test_dict_of_lists_to_list_of_dicts_with_handmade_data(inputs, expected_output):
     """
@@ -19,5 +20,3 @@ def test_dict_of_lists_to_list_of_dicts_with_handmade_data(inputs, expected_outp
     """
     result = pbt.collections_tools.dict_of_lists_to_list_of_dicts(inputs)
     assert result == expected_output
-
-

@@ -2,8 +2,8 @@ from typing import Dict
 
 
 def get_cmd_kwargs(defaults: Dict = None):
-    import sys
     import argparse
+    import sys
 
     if defaults is None:
         defaults = {}
@@ -20,5 +20,3 @@ def get_cmd_kwargs(defaults: Dict = None):
     args = parser.parse_args()
     cmd_kwargs.update(vars(args))
     return cmd_kwargs
-
-
