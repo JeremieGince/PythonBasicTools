@@ -14,7 +14,10 @@ from .decorators import log_func
 from .device import DeepLib, log_device_setup
 from .hash_tools import hash_dict
 from .logging_tools import logs_file_setup
-from .multiprocessing_tools import (apply_func_multiprocess,
-                                    multiprocess_logger_init, worker_init)
+from .multiprocessing_tools import (
+    apply_func_multiprocess,
+    multiprocess_logger_init,
+    worker_init,
+)
 from .run_output_file import RunOutputFile
 from .slurm import SlurmHostServer, generate_slurm_cmd, send_slurm_cmd
