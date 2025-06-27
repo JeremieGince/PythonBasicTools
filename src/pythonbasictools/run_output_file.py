@@ -1,13 +1,14 @@
 import datetime
+import json
 import logging
 import os
 from collections import defaultdict
-from typing import Dict, Any, Optional, List
-import json
-from .collections_tools import ravel_dict
-from .multiprocessing_tools import apply_func_multiprocess
+from typing import Any, Dict, List, Optional
 
 import pandas as pd
+
+from .collections_tools import ravel_dict
+from .multiprocessing_tools import apply_func_multiprocess
 
 
 class RunOutputFile:
@@ -43,17 +44,18 @@ class RunOutputFile:
     :type save_every_set: bool
     :param kwargs: Additional keyword arguments
     """
+
     EXT: str = ".out.json"
     DEFAULT_FILENAME: str = "run_output"
     RAVEL_DICT_KEY_SEP = "."  # The separator used to ravel the dictionary
 
     @classmethod
     def parse_results_from_dir_to_dataframe(
-            cls,
-            root_dir: str,
-            requires_columns: Optional[List[str]] = None,
-            file_column: str = "_file",
-            mp_kwargs: Optional[Dict[str, Any]] = None,
+        cls,
+        root_dir: str,
+        requires_columns: Optional[List[str]] = None,
+        file_column: str = "_file",
+        mp_kwargs: Optional[Dict[str, Any]] = None,
     ) -> pd.DataFrame:
         """
         Parse the results from a root directory. If requires_columns is not None, the rows that do not contain all the
@@ -73,17 +75,14 @@ class RunOutputFile:
         if mp_kwargs is None:
             mp_kwargs = {}
         all_files = [
-            os.path.join(root, file)
-            for root, _, files in os.walk(root_dir)
-            for file in files
-            if file.endswith(cls.EXT)
+            os.path.join(root, file) for root, _, files in os.walk(root_dir) for file in files if file.endswith(cls.EXT)
         ]
         results = apply_func_multiprocess(
             func=cls.raveled_state_from_file,
             iterable_of_args=[(file, False) for file in all_files],
             iterable_of_kwargs=[{"save_every_set": False, file_column: file} for file in all_files],
             desc=f"Processing files '{cls.EXT}' in {os.path.abspath(root_dir)}",
-            **mp_kwargs
+            **mp_kwargs,
         )
         df = pd.DataFrame(results)
         if requires_columns is not None:
@@ -91,12 +90,7 @@ class RunOutputFile:
         return df
 
     @classmethod
-    def raveled_state_from_file(
-            cls,
-            path: str,
-            raise_on_error: bool = False,
-            **kwargs
-    ) -> dict:
+    def raveled_state_from_file(cls, path: str, raise_on_error: bool = False, **kwargs) -> dict:
         """
         Get the raveled state of the data in the file.
 
@@ -117,18 +111,18 @@ class RunOutputFile:
             return {}
 
     def __init__(
-            self,
-            output_dir: str,
-            filename: str = DEFAULT_FILENAME,
-            data: dict = None,
-            save_every_set: bool = True,
-            **kwargs
+        self,
+        output_dir: str,
+        filename: str = DEFAULT_FILENAME,
+        data: Optional[dict] = None,
+        save_every_set: bool = True,
+        **kwargs,
     ):
         self.output_dir = output_dir
         self.filename = filename
         self.save_every_set = save_every_set
         self.data = {}
-        self.logs = defaultdict(list)
+        self.logs: Dict[str, list] = defaultdict(list)
         self.load_if_exists()
         if data is not None:
             self.data.update(data)
@@ -197,9 +191,16 @@ class RunOutputFile:
         _str += f"\n\nSaved to: {self.path}"
         return _str
 
-    def update(self, other):
+    def update(
+        self,
+        other: Dict[str, Any],
+        print_updated: bool = True,
+        print_header: str = "New Data",
+    ):
         self.data.update(other)
         self.save_if_save_every_set()
+        if print_updated:
+            print(f"{print_header}:\n{json.dumps(other, indent=4, default=str)}\n")
         return self
 
     def save_if_save_every_set(self):
@@ -213,6 +214,7 @@ class RunOutputFile:
             "data": self.data,
             "logs": self.logs,
             f"path": self.path,
+            "ENV": dict(os.environ),
         }
 
     def __setstate__(self, state: Dict[str, Any]):
@@ -222,6 +224,7 @@ class RunOutputFile:
 
     def save(self):
         import json
+
         if self.output_dir:
             os.makedirs(self.output_dir, exist_ok=True)
         save_data = self.__getstate__()
@@ -272,12 +275,11 @@ class RunOutputFile:
         if key_sep is None:
             key_sep = self.RAVEL_DICT_KEY_SEP
         raveled_state = self.data.copy()
-        raveled_state.update(self.slurm_env_vars)
-        raveled_state.update(self.slurm_ressources)
         return ravel_dict(raveled_state, key_sep=key_sep)
 
     def log(self, msg: str, level=logging.INFO, print_msg: bool = True, **kwargs):
         import warnings
+
         msg = str(msg)
         self.logs[level].append(msg)
         if print_msg:
