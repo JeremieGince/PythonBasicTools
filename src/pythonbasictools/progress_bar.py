@@ -2,20 +2,20 @@ import logging
 
 
 def printProgressBar(
-        iteration,
-        total,
-        prefix='',
-        suffix='',
-        decimals=0,
-        length=100,
-        fill='█',
-        printEnd='',
-        current_elapse_seconds=None,
-        log_func=print,
+    iteration,
+    total,
+    prefix="",
+    suffix="",
+    decimals=0,
+    length=100,
+    fill="█",
+    printEnd="",
+    current_elapse_seconds=None,
+    log_func=print,
 ) -> str:
     """
     Call in a loop to create terminal progress bar
-    
+
     :param iteration: Current iteration
     :type iteration: int
     :param total: Total iterations
@@ -36,39 +36,37 @@ def printProgressBar(
     :type current_elapse_seconds: float
     :param log_func: The logging function to use to log the function call.
     :type log_func: Callable
-    
+
     :return: The progress bar string.
     """
-    import warnings
     import os
     import time
+    import warnings
 
     os.getpid()
 
     if iteration > total:
         warnings.warn("progress bar not use properly: iteration > total")
         return ""
-    
+
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
+    bar = fill * filledLength + "-" * (length - filledLength)
     if current_elapse_seconds is None:
-        progress_bar = f'{prefix} |{bar}| {iteration}/{total}, {percent}%, {suffix}'
+        progress_bar = f"{prefix} |{bar}| {iteration}/{total}, {percent}%, {suffix}"
     else:
         sec_per_itr = max(1e-12, current_elapse_seconds / max(1, iteration))
         remaining_time = int((total - iteration) * sec_per_itr)
-        remaining_time = time.strftime('%H:%M:%S', time.gmtime(remaining_time))
-        current_elapse_seconds = time.strftime('%H:%M:%S', time.gmtime(current_elapse_seconds))
-        progress_bar = f'{prefix} |{bar}| {iteration}/{total}, ' \
-                       f'[{current_elapse_seconds}<{remaining_time}, {int(1/sec_per_itr)}itr/s] ' \
-                       f'{percent}% {suffix}'
+        remaining_time = time.strftime("%H:%M:%S", time.gmtime(remaining_time))  # type: ignore
+        current_elapse_seconds = time.strftime("%H:%M:%S", time.gmtime(current_elapse_seconds))
+        progress_bar = (
+            f"{prefix} |{bar}| {iteration}/{total}, "
+            f"[{current_elapse_seconds}<{remaining_time}, {int(1/sec_per_itr)}itr/s] "
+            f"{percent}% {suffix}"
+        )
     # Print New Line on Complete
     if iteration == total:
-        log_func('\r'+progress_bar.replace(fill, '#'))
+        log_func("\r" + progress_bar.replace(fill, "#"))
     else:
-        log_func('\r' + progress_bar, end=printEnd)
+        log_func("\r" + progress_bar, end=printEnd)
     return progress_bar
-
-
-
-

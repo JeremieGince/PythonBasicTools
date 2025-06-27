@@ -1,5 +1,5 @@
 import itertools
-from typing import Sequence, Any, List, Union, Optional, Dict
+from typing import Any, Dict, List, Optional, Sequence, Union
 
 
 def ravel_dict(d: dict, key_sep: str = ".") -> dict:
@@ -124,16 +124,14 @@ def list_of_dicts_to_dict_of_lists(list_of_dicts: List[dict], default: Any = Non
     :return: The dictionary of lists.
     :rtype: dict
     """
-    dict_of_lists = {}
+    dict_of_lists: Dict[str, List[Any]] = {}
     for i, d in enumerate(list_of_dicts):
         for k, v in d.items():
             dict_of_lists[k] = list_insert_replace_at(dict_of_lists.get(k, []), i, v, default=default)
     return dict_of_lists
 
 
-def dict_of_lists_to_list_of_dicts(
-        dict_of_lists: Dict
-) -> List[dict]:
+def dict_of_lists_to_list_of_dicts(dict_of_lists: Dict) -> List[dict]:
     """
     Convert a dictionary of lists to a list of dictionaries.
     The keys of the dictionary are used as keys in the dictionaries.
@@ -160,7 +158,7 @@ def dict_of_lists_to_list_of_dicts(
     :rtype: List[dict]
     """
     keys = list(dict_of_lists.keys())
-    list_of_dict_of_parameters = []
+    list_of_dict_of_parameters: List[dict] = []
     for key in keys:
         values = dict_of_lists[key]
         for i, value in enumerate(values):
@@ -170,9 +168,7 @@ def dict_of_lists_to_list_of_dicts(
     return list_of_dict_of_parameters
 
 
-def dict_of_lists_to_product_list_of_dicts(
-        dict_of_lists: Dict
-) -> List[dict]:
+def dict_of_lists_to_product_list_of_dicts(dict_of_lists: Dict) -> List[dict]:
     """
     Convert a dictionary of lists to a list of dictionaries as the Cartesian product of the lists.
 
@@ -193,7 +189,6 @@ def dict_of_lists_to_product_list_of_dicts(
     """
     keys = list(dict_of_lists.keys())
     list_of_dict_of_parameters = [
-        dict(zip(keys, values))
-        for values in itertools.product(*[dict_of_lists[key] for key in keys])
+        dict(zip(keys, values)) for values in itertools.product(*[dict_of_lists[key] for key in keys])
     ]
     return list_of_dict_of_parameters
