@@ -54,9 +54,9 @@ def send_slurm_cmd(hostnames, port, username, password, cmd_to_execute):
 def generate_slurm_cmd(
     repository_root: str,
     credential: Optional[Dict[str, str]] = None,
-    bash_file_to_run: str = None,
+    bash_file_to_run: Optional[str] = None,
     run_count: int = 1,
-    job_to_cancel: str = None,
+    job_to_cancel: Optional[str] = None,
 ) -> List[str]:
     """
     Generate a command to run on a host.

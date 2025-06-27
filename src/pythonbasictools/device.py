@@ -39,7 +39,7 @@ def log_device_setup(deepLib: DeepLib = DeepLib.Null, level=logging.INFO):
         DeepLib.Tensorflow: log_tensorflow_device_setup,
         DeepLib.SkLearn: log_sklearn_device_setup,
     }
-    setup_func[deepLib](level)
+    setup_func[deepLib](level)  # type: ignore
 
 
 def log_pytorch_device_setup(level=logging.INFO):

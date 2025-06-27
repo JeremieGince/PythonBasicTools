@@ -98,7 +98,16 @@ exclude_also = [
 [[tool.mypy.overrides]]
 module = [
     "tqdm",
-
+    "requests",
+    "pandas",
+    "tensorflow",
+    "psutil",
+    "docutils",
+    "docutils.nodes",
+    "paramiko",
+    "docutils.core",
+    "torch",
+    "sklearn",
 ]
 ignore_missing_imports = true
 

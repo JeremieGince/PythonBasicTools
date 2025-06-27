@@ -124,7 +124,7 @@ def list_of_dicts_to_dict_of_lists(list_of_dicts: List[dict], default: Any = Non
     :return: The dictionary of lists.
     :rtype: dict
     """
-    dict_of_lists = {}
+    dict_of_lists: Dict[str, List[Any]] = {}
     for i, d in enumerate(list_of_dicts):
         for k, v in d.items():
             dict_of_lists[k] = list_insert_replace_at(dict_of_lists.get(k, []), i, v, default=default)
@@ -158,7 +158,7 @@ def dict_of_lists_to_list_of_dicts(dict_of_lists: Dict) -> List[dict]:
     :rtype: List[dict]
     """
     keys = list(dict_of_lists.keys())
-    list_of_dict_of_parameters = []
+    list_of_dict_of_parameters: List[dict] = []
     for key in keys:
         values = dict_of_lists[key]
         for i, value in enumerate(values):

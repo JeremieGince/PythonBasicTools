@@ -28,7 +28,7 @@ def multiprocess_logger_init():
     return ql, q
 
 
-def _make_callable_from_list(list_of_callable: List[Callable] = None):
+def _make_callable_from_list(list_of_callable: Optional[List[Callable]] = None):
     """
     Make a callable from a list of callable.
 

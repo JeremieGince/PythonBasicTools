@@ -25,8 +25,8 @@ def get_bases_docs(prop, bases: Optional[Union[Type, List[Type]]] = None) -> Dic
     if not isinstance(bases, (list, tuple)):
         bases = [bases]
     if inspect.isclass(prop):
-        bases = prop.__bases__
-        return {b.__name__: inspect.getdoc(b) for b in bases}
+        bases = prop.__bases__  # type: ignore
+        return {b.__name__: inspect.getdoc(b) for b in bases}  # type: ignore
     elif inspect.ismethod(prop):
         cls = prop.__self__.__class__
     else:
@@ -35,7 +35,7 @@ def get_bases_docs(prop, bases: Optional[Union[Type, List[Type]]] = None) -> Dic
     if bases is None:
         bases = cls.__bases__
     bases_mthds = {base.__name__: getattr(base, prop.__name__, None) for base in bases if base}
-    return {k: inspect.getdoc(v) for k, v in bases_mthds.items() if v is not None}
+    return {k: inspect.getdoc(v) for k, v in bases_mthds.items() if v is not None}  # type: ignore
 
 
 def inherit_docstring(_prop=None, *, sep: str = "\n", bases: Optional[Union[Type, List[Type]]] = None):

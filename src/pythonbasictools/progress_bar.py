@@ -57,7 +57,7 @@ def printProgressBar(
     else:
         sec_per_itr = max(1e-12, current_elapse_seconds / max(1, iteration))
         remaining_time = int((total - iteration) * sec_per_itr)
-        remaining_time = time.strftime("%H:%M:%S", time.gmtime(remaining_time))
+        remaining_time = time.strftime("%H:%M:%S", time.gmtime(remaining_time))  # type: ignore
         current_elapse_seconds = time.strftime("%H:%M:%S", time.gmtime(current_elapse_seconds))
         progress_bar = (
             f"{prefix} |{bar}| {iteration}/{total}, "

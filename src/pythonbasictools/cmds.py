@@ -1,7 +1,7 @@
-from typing import Dict
+from typing import Dict, Optional
 
 
-def get_cmd_kwargs(defaults: Dict = None):
+def get_cmd_kwargs(defaults: Optional[Dict] = None):
     import argparse
     import sys
 
@@ -18,5 +18,5 @@ def get_cmd_kwargs(defaults: Dict = None):
         else:
             parser.add_argument(f"--{k}", type=type(v), default=v)
     args = parser.parse_args()
-    cmd_kwargs.update(vars(args))
+    cmd_kwargs.update(vars(args))  # type: ignore
     return cmd_kwargs

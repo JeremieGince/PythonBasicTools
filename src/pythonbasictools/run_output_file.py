@@ -114,7 +114,7 @@ class RunOutputFile:
         self,
         output_dir: str,
         filename: str = DEFAULT_FILENAME,
-        data: dict = None,
+        data: Optional[dict] = None,
         save_every_set: bool = True,
         **kwargs,
     ):
@@ -122,7 +122,7 @@ class RunOutputFile:
         self.filename = filename
         self.save_every_set = save_every_set
         self.data = {}
-        self.logs = defaultdict(list)
+        self.logs: Dict[str, list] = defaultdict(list)
         self.load_if_exists()
         if data is not None:
             self.data.update(data)
