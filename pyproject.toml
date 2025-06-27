@@ -1,6 +1,6 @@
 [project]
 name = "PythonBasicTools"
-version = "0.0.1"
+version = "0.0.3"
 dynamic = ["readme"]
 description = "Python Basic Tools"
 authors = [
