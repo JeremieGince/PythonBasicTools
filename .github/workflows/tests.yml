@@ -49,7 +49,7 @@ jobs:
         run: |
           uv run pytest tests \
             ${{ github.event.pull_request.head.repo.full_name != github.repository && '--cov-fail-under=98' || '' }} \
-            -n=1 --cov=src --cov-branch --cov-report="xml:tests/.tmp/coverage.xml" --cov-report=term-missing \ 
+            --cov=src --cov-branch --cov-report="xml:tests/.tmp/coverage.xml" --cov-report=term-missing \ 
             --durations=30 --session-timeout=600
 
       - name: Debug coverage before upload
