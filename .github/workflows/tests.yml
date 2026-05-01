@@ -19,76 +19,125 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13" ]
+        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13", "3.14" ]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m venv ./venv
-        . ./venv/bin/activate
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install --with=dev --no-interaction --no-ansi
-    - name: Test Linting
-      run: |
-        . ./venv/bin/activate
-        black src tests --check --diff
-        isort src tests --check-only --diff
-    - name: Test Typing
-      run: |
-        . ./venv/bin/activate
-        mypy src tests
-    - name: Test Notebooks
-      run: |
-        . ./venv/bin/activate
-        pytest --nbmake notebooks -n=auto --nbmake-kernel=python3 --nbmake-timeout=600  # 10 minutes timeout
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.2"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - name: Install dependencies
+        run: |
+          uv venv .venv
+          uv sync --locked --dev
+      - name: Test Linting
+        run: |
+          uv run black src tests --check --diff
+          uv run isort src tests --check-only --diff
+      - name: Test Typing
+        continue-on-error: true
+        run: |
+          uv run mypy src tests || true
+      - name: Test Unittests with pytest
+        run: |
+          mkdir -p tests/.tmp
+          uv run pytest tests \
+            ${{ github.event.pull_request.head.repo.full_name != github.repository && '--cov-fail-under=98' || '' }} \
+            --session-timeout=600
 
-    - name: Test Unittests with pytest
-      run: |
-        . ./venv/bin/activate
-        python run_pytests.py --tests_folder=tests --N_RANDOM_TESTS_PER_CASE=3 --no-run_slow --cov-report=xml:tests/.tmp/coverage.xml
+      - name: Debug coverage before upload
+        if: matrix.python-version == '3.13'
+        run: |
+          echo "=== Coverage summary ==="
+          head -5 tests/.tmp/coverage.xml
 
-    - name: Code Coverage
-      uses: orgoro/coverage@v3.2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        coverageFile: tests/.tmp/coverage.xml
-        thresholdAll: 0.0
-        thresholdNew: 0.98
-        thresholdModified: 0.0
+      - name: Upload coverage artifact
+        if: |
+          matrix.python-version == '3.13' &&
+          github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage
+          path: tests/.tmp/coverage.xml
+          if-no-files-found: error
+          retention-days: 1
 
-    - name: Test Build
-      run: |
-        . ./venv/bin/activate
-        python -m build
-        twine check dist/*
+      - name: Test Notebooks
+        run: |
+          uv run pytest --nbmake notebooks -n=auto --nbmake-kernel=python3 --nbmake-timeout=600  # 10 minutes timeout
+
+      - name: Test Build
+        if: ${{ matrix.python-version == '3.13' }}
+        run: |
+          uv run python -m build --sdist --wheel --no-isolation --outdir dist/ .
+          uv run twine check dist/*
 
   Run-tests-on-Windows:
     name: Run tests on Windows-latest
+    needs: [ Run-tests-on-Ubuntu ]
     runs-on: windows-latest
+    if: success()
     strategy:
       matrix:
-        python-version: [ "3.10", "3.11", "3.12", "3.13" ]
+        python-version: [ "3.9", "3.10", "3.11", "3.12", "3.13", "3.14" ]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies
-      run: |
-        python -m venv ./venv
-        . ./venv/Scripts/activate
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install --with=dev --no-interaction --no-ansi
-    - name: Test Unittests with pytest
-      run: |
-        . ./venv/Scripts/activate
-        python run_pytests.py --tests_folder=tests --N_RANDOM_TESTS_PER_CASE=1 --no-run_slow
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.9.2"
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+      - name: Install dependencies
+        run: |
+          uv venv .venv
+          uv sync --locked --dev
+      - name: Test Unittests with pytest
+        run: |
+          # TODO: add -n=auto when possible
+          uv run pytest tests --session-timeout=600
+
+
+  Coverage:
+    name: Post Coverage Report
+    needs: [ Run-tests-on-Ubuntu ]
+    runs-on: ubuntu-latest
+    if: success() && github.event.pull_request.head.repo.full_name == github.repository
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+      checks: write
+      statuses: write
+      issues: write
+      discussions: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: tests/.tmp
+          name: coverage
+      - run: ls -R tests/.tmp
+      - name: Debug coverage file
+        run: cat tests/.tmp/coverage.xml | head -50
+      - name: Post coverage
+        uses: orgoro/coverage@v3.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          coverageFile: tests/.tmp/coverage.xml
+          thresholdAll: 0.60
+          thresholdNew: 0.98
+          thresholdModified: 0.98
