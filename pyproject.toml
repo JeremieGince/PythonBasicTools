@@ -1,6 +1,6 @@
 [project]
 name = "PythonBasicTools"
-version = "0.0.3"
+version = "0.0.4"
 description = "Python Basic Tools"
 authors = [{ name = "Jérémie Gince", email = "gincejeremie@gmail.com" }]
 requires-python = ">=3.9,<3.15"
