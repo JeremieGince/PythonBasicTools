@@ -47,10 +47,10 @@ jobs:
           uv run mypy src tests || true
       - name: Test Unittests with pytest
         run: |
+          mkdir -p tests/.tmp
           uv run pytest tests \
             ${{ github.event.pull_request.head.repo.full_name != github.repository && '--cov-fail-under=98' || '' }} \
-            --cov=src --cov-branch --cov-report="xml:tests/.tmp/coverage.xml" --cov-report=term-missing \ 
-            --durations=30 --session-timeout=600
+            --session-timeout=600
 
       - name: Debug coverage before upload
         if: matrix.python-version == '3.13'
