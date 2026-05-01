@@ -2,13 +2,15 @@ import datetime
 import json
 import logging
 import os
+import warnings
 from collections import defaultdict
-from typing import Any, Dict, List, Optional
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Union
 
 import pandas as pd
 
-from .collections_tools import ravel_dict
-from .multiprocessing_tools import apply_func_multiprocess
+from ..collections_tools import ravel_dict
+from ..multiprocessing_tools import apply_func_multiprocess
 
 
 class RunOutputFile:
@@ -35,7 +37,7 @@ class RunOutputFile:
         ```
 
     :param output_dir: The directory where the output file will be saved.
-    :type output_dir: str
+    :type output_dir: Union[str, Path]
     :param filename: The name of the output file. Default is "run_output".
     :type filename: str
     :param data: The initial data to be saved to the output file.
@@ -52,7 +54,7 @@ class RunOutputFile:
     @classmethod
     def parse_results_from_dir_to_dataframe(
         cls,
-        root_dir: str,
+        root_dir: Union[str, Path],
         requires_columns: Optional[List[str]] = None,
         file_column: str = "_file",
         mp_kwargs: Optional[Dict[str, Any]] = None,
@@ -90,7 +92,7 @@ class RunOutputFile:
         return df
 
     @classmethod
-    def raveled_state_from_file(cls, path: str, raise_on_error: bool = False, **kwargs) -> dict:
+    def raveled_state_from_file(cls, path: Union[str, Path], raise_on_error: bool = False, **kwargs) -> dict:
         """
         Get the raveled state of the data in the file.
 
@@ -112,13 +114,13 @@ class RunOutputFile:
 
     def __init__(
         self,
-        output_dir: str,
+        output_dir: Union[str, Path],
         filename: str = DEFAULT_FILENAME,
         data: Optional[dict] = None,
         save_every_set: bool = True,
         **kwargs,
     ):
-        self.output_dir = output_dir
+        self.output_dir = Path(output_dir)
         self.filename = filename
         self.save_every_set = save_every_set
         self.data = {}
@@ -130,21 +132,22 @@ class RunOutputFile:
         self.kwargs = kwargs
 
     @property
-    def path(self):
-        return os.path.join(self.output_dir, self.filename + self.EXT)
+    def path(self) -> Path:
+        return self.output_dir / (self.filename + self.EXT)
 
     @property
-    def exists(self):
-        return os.path.exists(self.path)
+    def exists(self) -> bool:
+        return self.path.exists()
 
     @property
     def raveled_state(self):
         return self.get_raveled_state()
 
     @classmethod
-    def from_file(cls, path: str, **kwargs):
-        output_dir, filename = os.path.split(path)
-        filename = filename.replace(cls.EXT, "")
+    def from_file(cls, path: Union[str, Path], **kwargs):
+        path = Path(path)
+        output_dir = path.parent
+        filename = path.name.replace(cls.EXT, "")
         return cls(output_dir, filename, **kwargs)
 
     def __getitem__(self, key):
@@ -185,11 +188,12 @@ class RunOutputFile:
         """
         Return a string representation of the dict as a JSON string with indentation and save path.
         """
-        import json
-
         _str = json.dumps(self.data, indent=4)
         _str += f"\n\nSaved to: {self.path}"
         return _str
+
+    def __fspath__(self):
+        return os.fspath(self.path)
 
     def update(
         self,
@@ -213,7 +217,7 @@ class RunOutputFile:
             "datetime": str(datetime.datetime.now()),
             "data": self.data,
             "logs": self.logs,
-            f"path": self.path,
+            "path": str(self.path),
             "ENV": dict(os.environ),
         }
 
@@ -223,18 +227,13 @@ class RunOutputFile:
         return self
 
     def save(self):
-        import json
-
-        if self.output_dir:
-            os.makedirs(self.output_dir, exist_ok=True)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         save_data = self.__getstate__()
         with open(self.path, "w") as f:
             json.dump(save_data, f, indent=4)
         return self
 
     def load(self):
-        import json
-
         with open(self.path, "r") as f:
             saved_data = json.load(f)
 
@@ -245,8 +244,6 @@ class RunOutputFile:
         return self
 
     def legacy_load(self):
-        import json
-
         with open(self.path, "r") as f:
             self.data.update(json.load(f))
         return self
@@ -278,8 +275,6 @@ class RunOutputFile:
         return ravel_dict(raveled_state, key_sep=key_sep)
 
     def log(self, msg: str, level=logging.INFO, print_msg: bool = True, **kwargs):
-        import warnings
-
         msg = str(msg)
         self.logs[level].append(msg)
         if print_msg:

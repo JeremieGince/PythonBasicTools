@@ -21,16 +21,7 @@
 # Description
 
 This package is a module containing a set of tools useful to any project made with python. 
-It contains tools for:
 
-  - Logging;
-  - Device setup with sklearn, pytorch and tensorflow;
-  - Multiprocessing;
-  - Progress bar;
-  - Sending files to a discord server;
-  - Useful decorators;
-  - Useful functions for docstrings;
-  - And more to come!
 
 ---------------------------------------------------------------------------
 
