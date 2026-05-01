@@ -1,0 +1,37 @@
+pythonbasictools.experiment\_utils package
+==========================================
+
+Submodules
+----------
+
+pythonbasictools.experiment\_utils.metadata\_file module
+--------------------------------------------------------
+
+.. automodule:: pythonbasictools.experiment_utils.metadata_file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pythonbasictools.experiment\_utils.output\_folder module
+--------------------------------------------------------
+
+.. automodule:: pythonbasictools.experiment_utils.output_folder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pythonbasictools.experiment\_utils.run\_output\_file module
+-----------------------------------------------------------
+
+.. automodule:: pythonbasictools.experiment_utils.run_output_file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pythonbasictools.experiment_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
