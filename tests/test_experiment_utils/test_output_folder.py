@@ -187,3 +187,60 @@ class TestOutputFolder:
         OutputFolder(tmp_path / "run_b")
         folders = OutputFolder.gather_output_folders(tmp_path)
         assert len(folders) == 2
+
+    # --- freeze / unfreeze ---
+
+    def test_new_folder_starts_unfrozen(self, output_folder):
+        assert not output_folder.frozen
+
+    def test_freeze_locks_both_files(self, output_folder):
+        output_folder.freeze()
+        assert output_folder.frozen
+        assert output_folder.metadata_file.frozen
+        assert output_folder.data_file.frozen
+
+    def test_freeze_returns_self(self, output_folder):
+        assert output_folder.freeze() is output_folder
+
+    def test_freeze_prevents_metadata_update(self, output_folder):
+        output_folder.freeze()
+        with pytest.raises(RuntimeError):
+            output_folder.update_metadata({"key": "value"})
+
+    def test_freeze_prevents_data_update(self, output_folder):
+        output_folder.freeze()
+        with pytest.raises(RuntimeError):
+            output_folder.update_data({"metric": 1.0})
+
+    def test_unfreeze_allows_writes_again(self, output_folder):
+        output_folder.freeze()
+        output_folder.unfreeze()
+        assert not output_folder.frozen
+        output_folder.update_metadata({"key": "value"})
+        output_folder.update_data({"metric": 1.0})
+        assert output_folder.metadata_file["key"] == "value"
+        assert output_folder.data_file["metric"] == 1.0
+
+    def test_unfreeze_returns_self(self, output_folder):
+        output_folder.freeze()
+        assert output_folder.unfreeze() is output_folder
+
+    def test_freeze_persisted_to_disk(self, tmp_path):
+        OutputFolder(tmp_path / "run").freeze()
+        reloaded = OutputFolder(tmp_path / "run")
+        assert reloaded.frozen
+
+    def test_unfreeze_persisted_to_disk(self, tmp_path):
+        folder = OutputFolder(tmp_path / "run")
+        folder.freeze()
+        folder.unfreeze()
+        reloaded = OutputFolder(tmp_path / "run")
+        assert not reloaded.frozen
+
+    def test_frozen_false_when_only_metadata_frozen(self, output_folder):
+        output_folder.metadata_file.freeze()
+        assert not output_folder.frozen
+
+    def test_frozen_false_when_only_data_frozen(self, output_folder):
+        output_folder.data_file.freeze()
+        assert not output_folder.frozen

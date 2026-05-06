@@ -172,6 +172,22 @@ class OutputFolder:
     def __repr__(self):
         return f"{self.__class__.__name__}({self._path})"
 
+    @property
+    def frozen(self) -> bool:
+        return self._metadata_file.frozen and self._data_file.frozen
+
+    def freeze(self):
+        """Lock both the metadata and data files. Persisted to disk."""
+        self._metadata_file.freeze()
+        self._data_file.freeze()
+        return self
+
+    def unfreeze(self):
+        """Unlock both the metadata and data files. Persisted to disk."""
+        self._metadata_file.unfreeze()
+        self._data_file.unfreeze()
+        return self
+
     def update_metadata(self, other: Optional[dict] = None, **kwargs):
         """
         Updates the metadata of the instance with information from the provided dictionary
