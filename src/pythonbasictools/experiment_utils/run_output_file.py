@@ -24,17 +24,23 @@ class RunOutputFile:
         ```python
         from run_output_file import RunOutputFile
 
-        output = RunOutputFile("output_dir", save_every_set=True)
-        output_file.update({"status": "STARTING"})
+        output = RunOutputFile("output_dir")
+        output.update({"status": "STARTING"})
         print("Doing some work...")
         work = 1 + 1
-        output_file.update({"status": "WORKING", "work": work})
+        output.update({"status": "WORKING", "work": work})
         print("Doing some other stuff...")
         stuff = 2 + 2
-        output_file.update({"status": "WORKING", "stuff": stuff})
+        output.update({"status": "WORKING", "stuff": stuff})
         print("Done working.")
-        output_file.update({"status": "DONE"})
+        output.update({"status": "DONE"})
+        output.freeze()  # Lock the file — no further changes allowed
         ```
+
+    ENV is captured once at file creation and preserved across runs. Access it via ``get("ENV.key")``.
+
+    Freeze state is persisted to disk: a file created with :meth:`freeze` will be loaded already frozen.
+    Call :meth:`unfreeze` to allow changes again.
 
     :param output_dir: The directory where the output file will be saved.
     :type output_dir: Union[str, Path]
@@ -42,7 +48,7 @@ class RunOutputFile:
     :type filename: str
     :param data: The initial data to be saved to the output file.
     :type data: dict
-    :param save_every_set: If True, the data will be saved to the output file every time an item is added or updated.
+    :param save_every_set: If True, the data will be saved every time an item is added or updated. Default is True.
     :type save_every_set: bool
     :param kwargs: Additional keyword arguments
     """
@@ -125,9 +131,20 @@ class RunOutputFile:
         self.save_every_set = save_every_set
         self.data = {}
         self.logs: Dict[str, list] = defaultdict(list)
+        self.env: Dict[str, str] = {}
+        self._frozen: bool = False
+
+        file_exists = self.exists
         self.load_if_exists()
+
+        if not file_exists:
+            # Capture ENV only once at file creation; preserved on subsequent loads
+            self.env = dict(os.environ)
+
         if data is not None:
+            self._check_not_frozen()
             self.data.update(data)
+
         self.save_if_save_every_set()
         self.kwargs = kwargs
 
@@ -140,6 +157,10 @@ class RunOutputFile:
         return self.path.exists()
 
     @property
+    def frozen(self) -> bool:
+        return self._frozen
+
+    @property
     def raveled_state(self):
         return self.get_raveled_state()
 
@@ -150,19 +171,64 @@ class RunOutputFile:
         filename = path.name.replace(cls.EXT, "")
         return cls(output_dir, filename, **kwargs)
 
+    def _check_not_frozen(self):
+        if self._frozen:
+            raise RuntimeError(f"RunOutputFile at '{self.path}' is frozen. Call unfreeze() to allow changes.")
+
+    def freeze(self):
+        """Lock this file: no data changes are allowed until :meth:`unfreeze` is called. Persisted to disk."""
+        self._frozen = True
+        self.save()
+        return self
+
+    def unfreeze(self):
+        """Unlock this file and allow data changes again. Persisted to disk."""
+        self._frozen = False
+        self.save()
+        return self
+
     def __getitem__(self, key):
         return self.data[key]
 
     def __setitem__(self, key, value):
+        self._check_not_frozen()
         self.data[key] = value
         self.save_if_save_every_set()
 
     def __delitem__(self, key):
+        self._check_not_frozen()
         del self.data[key]
         self.save_if_save_every_set()
 
     def get(self, key, default=None):
-        return self.data.get(key, default)
+        """
+        Get a value by key. Looks in ``data`` first.
+
+        Supports a ``"META_KEY.KEY"`` format to retrieve values from internal meta-dicts:
+
+        - ``get("ENV.HOME")`` → value from the captured environment dict
+        - ``get("logs.20")`` → value from the logs dict (key is the log level integer as string)
+
+        :param key: The key to look up.
+        :param default: The value to return if the key is not found.
+        :return: The value associated with the key, or ``default``.
+        """
+        if key in self.data:
+            return self.data[key]
+        if self.RAVEL_DICT_KEY_SEP in key:
+            meta_key, sub_key = key.split(self.RAVEL_DICT_KEY_SEP, 1)
+            meta_dict = self._get_meta_dict(meta_key)
+            if meta_dict is not None:
+                return meta_dict.get(sub_key, default)
+        return default
+
+    def _get_meta_dict(self, meta_key: str) -> Optional[dict]:
+        upper = meta_key.upper()
+        if upper == "ENV":
+            return self.env
+        if upper in ("LOGS", "LOG"):
+            return dict(self.logs)
+        return None
 
     def __contains__(self, key):
         return key in self.data
@@ -174,11 +240,13 @@ class RunOutputFile:
         return len(self.data)
 
     def __add__(self, other):
+        self._check_not_frozen()
         self.data.update(other)
         self.save_if_save_every_set()
         return self
 
     def __sub__(self, other):
+        self._check_not_frozen()
         for key in other:
             self.data.pop(key, None)
         self.save_if_save_every_set()
@@ -190,6 +258,7 @@ class RunOutputFile:
         """
         _str = json.dumps(self.data, indent=4)
         _str += f"\n\nSaved to: {self.path}"
+        _str += f"\nFrozen: {self._frozen}"
         return _str
 
     def __fspath__(self):
@@ -201,6 +270,7 @@ class RunOutputFile:
         print_updated: bool = True,
         print_header: str = "New Data",
     ):
+        self._check_not_frozen()
         self.data.update(other)
         self.save_if_save_every_set()
         if print_updated:
@@ -218,12 +288,15 @@ class RunOutputFile:
             "data": self.data,
             "logs": self.logs,
             "path": str(self.path),
-            "ENV": dict(os.environ),
+            "ENV": self.env,
+            "frozen": self._frozen,
         }
 
     def __setstate__(self, state: Dict[str, Any]):
         self.data.update(state.get("data", {}))
         self.logs.update(state.get("logs", {}))
+        self.env = state.get("ENV", {})
+        self._frozen = state.get("frozen", False)
         return self
 
     def save(self):
@@ -275,6 +348,7 @@ class RunOutputFile:
         return ravel_dict(raveled_state, key_sep=key_sep)
 
     def log(self, msg: str, level=logging.INFO, print_msg: bool = True, **kwargs):
+        self._check_not_frozen()
         msg = str(msg)
         self.logs[level].append(msg)
         if print_msg:

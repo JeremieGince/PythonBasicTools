@@ -50,6 +50,7 @@ class TestRunOutputFile:
         r = repr(rof)
         assert "initial" in r
         assert "Saved to" in r
+        assert "Frozen" in r
 
     def test_fspath(self, rof):
         fspath = os.fspath(rof)
@@ -172,3 +173,142 @@ class TestRunOutputFile:
         assert isinstance(df, pd.DataFrame)
         assert not df.empty
         assert df["initial"].notna().all()
+
+    # --- freeze / unfreeze ---
+
+    def test_new_file_starts_unfrozen(self, tmp_path):
+        rof = RunOutputFile(tmp_path / "fresh")
+        assert not rof.frozen
+
+    def test_freeze_sets_flag(self, rof):
+        assert not rof.frozen
+        rof.freeze()
+        assert rof.frozen
+
+    def test_freeze_persisted_to_disk(self, tmp_path):
+        rof = RunOutputFile(tmp_path)
+        rof.freeze()
+        reloaded = RunOutputFile(tmp_path)
+        assert reloaded.frozen
+
+    def test_unfreeze_clears_flag(self, tmp_path):
+        rof = RunOutputFile(tmp_path)
+        rof.freeze()
+        rof.unfreeze()
+        assert not rof.frozen
+
+    def test_unfreeze_persisted_to_disk(self, tmp_path):
+        rof = RunOutputFile(tmp_path)
+        rof.freeze()
+        rof.unfreeze()
+        reloaded = RunOutputFile(tmp_path)
+        assert not reloaded.frozen
+
+    def test_setitem_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            rof["key"] = "value"
+
+    def test_delitem_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            del rof["initial"]
+
+    def test_add_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            rof + {"extra": 2}
+
+    def test_sub_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            rof - ["initial"]
+
+    def test_update_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            rof.update({"key": "value"})
+
+    def test_log_raises_when_frozen(self, rof):
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            rof.log("msg")
+
+    def test_init_with_data_raises_when_frozen(self, tmp_path):
+        rof = RunOutputFile(tmp_path)
+        rof.freeze()
+        with pytest.raises(RuntimeError):
+            RunOutputFile(tmp_path, data={"extra": 1})
+
+    def test_unfreeze_allows_writes_again(self, rof):
+        rof.freeze()
+        rof.unfreeze()
+        rof["key"] = "value"
+        assert rof["key"] == "value"
+
+    def test_legacy_file_loads_unfrozen(self, tmp_path):
+        legacy_data = {"result": 42}
+        rof_path = tmp_path / (RunOutputFile.DEFAULT_FILENAME + RunOutputFile.EXT)
+        with open(rof_path, "w") as f:
+            json.dump(legacy_data, f)
+        rof = RunOutputFile(tmp_path, save_every_set=False)
+        assert not rof.frozen
+
+    # --- ENV preservation ---
+
+    def test_env_captured_on_creation(self, tmp_path):
+        rof = RunOutputFile(tmp_path)
+        assert isinstance(rof.env, dict)
+        assert len(rof.env) > 0
+
+    def test_env_contains_known_var(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_TEST_VAR", "hello")
+        rof = RunOutputFile(tmp_path)
+        assert rof.env.get("ROF_TEST_VAR") == "hello"
+
+    def test_env_preserved_on_reload(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_TEST_VAR", "original")
+        rof = RunOutputFile(tmp_path)
+        original_env = rof.env.copy()
+
+        monkeypatch.setenv("ROF_TEST_VAR", "changed")
+        reloaded = RunOutputFile(tmp_path)
+        assert reloaded.env.get("ROF_TEST_VAR") == "original"
+        assert reloaded.env == original_env
+
+    def test_env_not_captured_again_on_reload(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_ONLY_FIRST", "yes")
+        RunOutputFile(tmp_path)
+
+        monkeypatch.delenv("ROF_ONLY_FIRST")
+        reloaded = RunOutputFile(tmp_path)
+        assert reloaded.env.get("ROF_ONLY_FIRST") == "yes"
+
+    # --- get() with META_KEY.KEY format ---
+
+    def test_get_env_key(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_TEST_VAR", "myvalue")
+        rof = RunOutputFile(tmp_path)
+        assert rof.get("ENV.ROF_TEST_VAR") == "myvalue"
+
+    def test_get_env_missing_key_returns_default(self, rof):
+        assert rof.get("ENV.NONEXISTENT_KEY_XYZ", "fallback") == "fallback"
+
+    def test_get_data_takes_priority_over_meta(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_TEST_VAR", "env_value")
+        rof = RunOutputFile(tmp_path, save_every_set=False)
+        rof.data["ENV.ROF_TEST_VAR"] = "data_value"
+        assert rof.get("ENV.ROF_TEST_VAR") == "data_value"
+
+    def test_get_env_case_insensitive_prefix(self, tmp_path, monkeypatch):
+        monkeypatch.setenv("ROF_TEST_VAR", "myvalue")
+        rof = RunOutputFile(tmp_path)
+        assert rof.get("env.ROF_TEST_VAR") == "myvalue"
+
+    def test_get_plain_key_still_works(self, rof):
+        assert rof.get("initial") == 1
+        assert rof.get("missing") is None
+        assert rof.get("missing", 42) == 42
+
+    def test_get_unknown_meta_prefix_returns_default(self, rof):
+        assert rof.get("UNKNOWN.key", "default") == "default"

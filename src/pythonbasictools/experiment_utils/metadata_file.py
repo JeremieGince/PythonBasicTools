@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 from typing import Optional, Union
 
@@ -21,16 +20,7 @@ class MetadataFile(RunOutputFile):
             output_dir=output_dir,  # type: ignore
             filename=filename,
             ext=self.EXT,
-            data=data or {},
+            data=data,
             save_every_set=save_every_set,
             **kwargs,
         )
-
-    def __getstate__(self):
-        state = super().__getstate__()
-        state["ENV"] = self.env
-        return state
-
-    @property
-    def env(self):
-        return dict(os.environ)

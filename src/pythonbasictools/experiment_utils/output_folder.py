@@ -90,6 +90,7 @@ class OutputFolder:
         root_folder: Union[str, Path],
         metadata_ext: str = MetadataFile.EXT,
         data_ext: str = RunOutputFile.EXT,
+        **kwargs,
     ) -> Tuple[pd.DataFrame, pd.DataFrame]:
         """
         Gather all the metadata files and data files and build two dataframes, one for metadata and
@@ -100,6 +101,7 @@ class OutputFolder:
         >>> metadata_df, data_df = OutputFolder.root_folder_to_dataframe("./data/root")
         >>> full_df = pd.merge(metadata_df, data_df, on="_output_folder")
         """
+        kwargs.setdefault("save_every_set", False)
         root_folder = Path(root_folder)
         metadata_paths = list(root_folder.rglob(f"*{metadata_ext}"))
         data_paths = list(root_folder.rglob(f"*{data_ext}"))
@@ -108,7 +110,7 @@ class OutputFolder:
             [
                 {
                     "_output_folder": p.parent.relative_to(root_folder),
-                    **MetadataFile.raveled_state_from_file(p),  # type: ignore
+                    **MetadataFile.raveled_state_from_file(p, **kwargs),  # type: ignore
                 }
                 for p in tqdm(metadata_paths, desc="Gathering metadata")
             ]
@@ -117,7 +119,7 @@ class OutputFolder:
             [
                 {
                     "_output_folder": p.parent.relative_to(root_folder),
-                    **RunOutputFile.raveled_state_from_file(p),  # type: ignore
+                    **RunOutputFile.raveled_state_from_file(p, **kwargs),  # type: ignore
                 }
                 for p in tqdm(data_paths, desc="Gathering data")
             ]
@@ -130,12 +132,18 @@ class OutputFolder:
         root_folder: Union[str, Path],
         metadata_ext: str = MetadataFile.EXT,
         data_ext: str = RunOutputFile.EXT,
+        **kwargs,
     ) -> List["OutputFolder"]:
+        kwargs.setdefault("metadata_kwargs", {})
+        kwargs.setdefault("data_kwargs", {})
+        kwargs["metadata_kwargs"].setdefault("save_every_set", False)
+        kwargs["data_kwargs"].setdefault("save_every_set", False)
+
         root_folder = Path(root_folder)
         metadata_paths = list(root_folder.rglob(f"*{metadata_ext}"))
         data_paths = list(root_folder.rglob(f"*{data_ext}"))
         parent_paths = set(p.parent for p in (metadata_paths + data_paths))
-        output_folders = [cls(p) for p in tqdm(parent_paths, desc="Gathering output folders")]
+        output_folders = [cls(p, **kwargs) for p in tqdm(parent_paths, desc="Gathering output folders")]
         return output_folders
 
     def __init__(
@@ -143,16 +151,19 @@ class OutputFolder:
         path: Union[str, Path],
         metadata_file: Optional[MetadataFile] = None,
         data_file: Optional[RunOutputFile] = None,
+        metadata_kwargs: Optional[dict] = None,
+        data_kwargs: Optional[dict] = None,
     ):
+        metadata_kwargs = metadata_kwargs or {}
+        data_kwargs = data_kwargs or {}
         self._path = Path(path)
         self.path.mkdir(parents=True, exist_ok=True)
         if metadata_file is None:
-            metadata_file = MetadataFile(self.path)
+            metadata_file = MetadataFile(self.path, **metadata_kwargs)
         if data_file is None:
-            data_file = RunOutputFile(self.path)  # type: ignore
+            data_file = RunOutputFile(self.path, **data_kwargs)  # type: ignore
         self._metadata_file = metadata_file
         self._data_file = data_file
-        self.metadata_file.save()
         self._state_file = ExperimentStateFile(self.path)
 
     def __fspath__(self):
